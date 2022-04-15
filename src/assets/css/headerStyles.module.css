@@ -1,3 +1,9 @@
+.headerLogin{
+    height: 20vh
+}
+.headerMain{
+    height: 10vh
+}
 .logoImage{
     width: 125px;
     margin: 0em 1em;

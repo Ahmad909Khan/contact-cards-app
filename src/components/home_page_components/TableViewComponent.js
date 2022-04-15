@@ -7,8 +7,11 @@ const TableViewComponent = () => {
     const cardCollection = useSelector((state) => state.users.userCards)
 
     return (
-        <div className="p-3 table-responsive-lg my-5">
-            <table className="table table-bordered table-responsive table-hover">
+        <div className="p-3 table-responsive my-5">
+            <div className="my-3">
+                <h3>List of users</h3>
+            </div>
+            <table className={homePageStyles.tableWidth + " table table-bordered table-hover"}>
                 <thead>
                     <tr>
                         <th scope="col">Sr. No</th>

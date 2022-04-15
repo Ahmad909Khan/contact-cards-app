@@ -1,10 +1,11 @@
-import { faAt } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React from 'react';
+import { faAt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const LoginFooter = () => {
   return (
-    <div className="bg-secondary p-3 text-center text-white">
+    <div className={homePageStyles.footer + " bg-secondary p-3 text-center text-white"}>
       <div>About Us</div>
       <div>
         Contact us 

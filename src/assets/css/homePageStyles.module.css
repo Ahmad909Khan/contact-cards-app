@@ -1,21 +1,16 @@
 .homeMain {
-    min-height: 78.7vh;
+    min-height: 80vh;
 }
 .loginMain {
-    min-height: 62.4vh;
+    min-height: 70vh;
 }
 .activeNavItem {
     content: "";
     border-bottom: 5px solid #FFCA2C;
 }
-.addressColumn{
-    width: 30%;
+.tableWidth{
+    min-width: 1000px;
 }
-@media screen and (min-width: 1367px) {
-    .homeMain {
-        min-height: 81.4vh;
-    }
-    .loginMain {
-        min-height: 74.5vh;
-    }
+.footer {
+    height: 10vh;
 }

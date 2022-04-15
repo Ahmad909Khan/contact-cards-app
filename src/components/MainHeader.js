@@ -18,7 +18,7 @@ const MainHeader = () => {
     }
 
     return (
-        <div className="p-1 border bg-secondary text-white row m-0">
+        <div className={headerStyles.headerMain + " p-1 border bg-secondary text-white row m-0"}>
             <div className="col-md-3 p-1 row m-0">
                 <div className="col-3">
                     <Link to='/home-page' className="text-decoration-none m-0">
