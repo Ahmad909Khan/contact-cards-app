@@ -1,0 +1,10 @@
+export const ActionTypes = {
+    LOGIN: 'LOGIN',
+    NOT_AUTH: 'NOT_AUTH',
+    LOGOUT: 'LOGOUT',
+    FAVOURITE_TRIGGER: 'FAVOURITE_TRIGGER',
+    SEARCH: 'SEARCH',
+    ADD_NEW_CARD: 'ADD_NEW_CARD',
+    DELETE_CARD: 'DELETE_CARD',
+    EDIT_CARD: 'EDIT_CARD',
+}

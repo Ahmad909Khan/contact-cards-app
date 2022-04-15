@@ -1,0 +1,47 @@
+.card{
+    position: relative;
+    min-height: fit-content;
+    min-height: 200px;
+    min-width: 400px;
+    background-color: #64ceff;
+    font-size: 14px;
+    border: 2px solid blue;
+    border-radius: 8px;
+}
+.profileImage{
+    width: 100px;
+    height: 100px;
+    font-size: 60px;
+    background-color: #6C757D;
+    color: #fff;
+    border: 1px outset #333;
+}
+.fontFullName{
+    font-size: 22px;
+    font-weight: bold;
+}
+.fontIdentifiedAs,
+.fontWebsite{
+    font-size: 17px;
+}
+.fontDesignation{
+    font-size: 14px;
+    font-style: italic;
+}
+.fontAddress{
+    font-size: 15px;
+    text-align: right;
+    line-height: 1.4;
+}
+.fontAddressTitle{
+    font-size: 20px;
+}
+.colorPink{
+    color: #FB2791;
+}
+.cardButtons, .cardButtonsFlipped{
+    cursor: pointer;
+}
+.cardButtonsFlipped{
+    right: 0;
+}

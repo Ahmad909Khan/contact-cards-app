@@ -1,0 +1,21 @@
+.homeMain {
+    min-height: 78.7vh;
+}
+.loginMain {
+    min-height: 62.4vh;
+}
+.activeNavItem {
+    content: "";
+    border-bottom: 5px solid #FFCA2C;
+}
+.addressColumn{
+    width: 30%;
+}
+@media screen and (min-width: 1367px) {
+    .homeMain {
+        min-height: 81.4vh;
+    }
+    .loginMain {
+        min-height: 74.5vh;
+    }
+}

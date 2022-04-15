@@ -1,0 +1,13 @@
+.logoImage{
+    width: 125px;
+    margin: 0em 1em;
+}
+.mainHeaderLogoImage{
+    width: 50px;
+}
+.searchSelectDropdown{
+    width: auto;
+}
+input:focus{
+    border: none;
+}
