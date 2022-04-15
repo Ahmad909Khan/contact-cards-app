@@ -49,22 +49,29 @@ const UpdateCardComponent = () => {
   const zipCodeRegex = /^[0-9]{6}$/;
 
   let validationFlag;
-  const [firstNameValidation, setFirstNameValidation] = useState('');
-  const [lastNameValidation, setLastNameValidation] = useState('');
-  const [designationValidation, setDesignationValidation] = useState('');
-  const [emailValidation, setEmailValidation] = useState('');
-  const [phoneValidation, setPhoneValidation] = useState('');
-  const [addressAreaValidation, setAddressAreaValidation] = useState('');
-  const [addressCityValidation, setAddressCityValidation] = useState('');
-  const [addressStateValidation, setAddressStateValidation] = useState('');
-  const [addressCountryValidation, setAddressCountryValidation] = useState('');
-  const [zipCodeValidation, setZipCodeValidation] = useState('');
-  const [websiteValidation, setWebsiteValidation] = useState('');
+
+  const [errors, setErrors] = useState({});
+
+  // const [phoneValue, setPhoneValue] = useState('');
+
+  // const formatPhoneNumber = (phoneNumber) => {
+
+  //   if (phoneNumber.length === 4)
+  //     return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+
+  //   if (phoneNumber.length === 8)
+  //   return `${phoneNumber.slice(0, 7)
+  //   }-${phoneNumber.slice(7)}`
+  // }
+
+  // const handlePhoneInput = (event) => {
+  //   const formattedPhoneNumber = formatPhoneNumber(event.target.value)
+  //   setPhoneValue(formattedPhoneNumber)
+  // }
 
   const submitHandler = (event) => {
 
     event.preventDefault();
-    validationFlag = false;
 
     let firstNameInput = firstNameInputRef.current.value;
     let lastNameInput = lastNameInputRef.current.value;
@@ -78,132 +85,81 @@ const UpdateCardComponent = () => {
     let zipCodeInput = zipCodeInputRef.current.value;
     let websiteInput = websiteInputRef.current.value;
 
-    const phoneRegexValid = () => {
-      setPhoneValidation('Phone number must be a 10 digit number');
-      validationFlag = true;
+    card = {
+      firstName: firstNameInput,
+      lastName: lastNameInput,
+      designation: designationInput,
+      contact_phone: phoneInput,
+      contact_email: emailInput,
+      address_area: addressAreaInput,
+      address_city: addressCityInput,
+      address_state: addressStateInput,
+      address_country: addressCountryInput,
+      address_zipcode: zipCodeInput,
+      website: websiteInput,
+      isFavourite: card.isFavourite ? card.isFavourite : false,
+      tags: []
+    };
+    const validate = (values) => {
+      const errors = {}
+      if (!values.firstName) {
+        errors.firstName = 'Please enter first name.';
+      }
+      if (!values.lastName) {
+        errors.lastName = 'Please enter last name.';
+      }
+      if (!values.designation) {
+        errors.designation = 'Please enter designation.';
+      }
+      if (!values.contact_phone) {
+        errors.contact_phone = 'Please enter phone number.';
+      } else if (!phoneRegex.test(values.contact_phone)) {
+        errors.contact_phone = 'Phone number must be a 10 digit number.';
+      }
+      if (!values.contact_email) {
+        errors.contact_email = 'Please enter email address.';
+      } else if (!emailRegex.test(values.contact_email)) {
+        errors.contact_email = 'Wntered E-mail is not valid.'
+      }
+      if (!values.address_area) {
+        errors.address_area = 'Please enter your address area.';
+      }
+      if (!values.address_city) {
+        errors.address_city = 'Please enter your city.';
+      }
+      if (!values.address_state) {
+        errors.address_state = 'Please enter your state.';
+      }
+      if (!values.address_country) {
+        errors.address_country = 'Please enter your country.';
+      }
+      if (!values.address_zipcode) {
+        errors.address_zipcode = 'Please enter your zip code.';
+      } else if (!zipCodeRegex.test(values.address_zipcode)) {
+        errors.address_zipcode = 'Zip Code must be a 6 digit number.'
+      }
+      if (!values.website) {
+        errors.website = 'Please enter your website.';
+      } else if (!websiteRegex.test(values.website)) {
+        errors.website = 'Entered Website is not valid.'
+      }
+      return errors;
     }
 
-    const emailRegexValid = () => {
-      setEmailValidation('Entered Email is not valid');
-      validationFlag = true;
+    setErrors(validate(card));
+    console.log(errors);
+
+    if (Object.keys(errors).length === 0) {
+      validationFlag = true
     }
-
-    const zipCodeRegexValid = () => {
-      setZipCodeValidation('Zip code number must be a 6 digit number');
-      validationFlag = true;
-    }
-
-    const websiteRegexValid = () => {
-      setWebsiteValidation('Entered website is not valid');
-      validationFlag = true;
-    }
-
-    if (
-      firstNameInput.length === 0
-      || lastNameInput.length === 0
-      || designationInput.length === 0
-      || phoneInput.length === 0
-      || emailInput.length === 0
-      || addressAreaInput.length === 0
-      || addressCityInput.length === 0
-      || addressStateInput.length === 0
-      || addressCountryInput.length === 0
-      || zipCodeInput.length === 0
-      || websiteInput.length === 0
-    ) {
-      validationFlag = true;
-    }
-
-    firstNameInput.length === 0
-      ? setFirstNameValidation('Please enter first name')
-      : setFirstNameValidation('');
-
-    lastNameInput.length === 0
-      ? setLastNameValidation('Please enter last name')
-      : setLastNameValidation('');
-
-    designationInput.length === 0
-      ? setDesignationValidation('Please enter designation')
-      : setDesignationValidation('');
-
-    phoneInput.length === 0
-      ? setPhoneValidation('Please enter phone number')
-      : (phoneInput.length > 0 && !phoneRegex.test(phoneInput))
-        ? phoneRegexValid()
-        : setPhoneValidation('');
-
-    emailInput.length === 0
-      ? setEmailValidation('Please enter email address')
-      : (emailInput.length > 0 && !emailRegex.test(emailInput))
-        ? emailRegexValid()
-        : setEmailValidation('');
-
-    addressAreaInput.length === 0
-      ? setAddressAreaValidation('Please enter address area')
-      : setAddressAreaValidation('');
-
-    addressCityInput.length === 0
-      ? setAddressCityValidation('Please enter your city')
-      : setAddressCityValidation('');
-
-    addressStateInput.length === 0
-      ? setAddressStateValidation('Please enter your state')
-      : setAddressStateValidation('');
-
-    addressCountryInput.length === 0
-      ? setAddressCountryValidation('Please enter your area')
-      : setAddressCountryValidation('');
-
-    zipCodeInput.length === 0
-      ? setZipCodeValidation('Please enter your zip code')
-      : (zipCodeInput.length > 0 && !zipCodeRegex.test(zipCodeInput))
-        ? zipCodeRegexValid()
-        : setZipCodeValidation('');
-
-    websiteInput.length === 0
-      ? setWebsiteValidation('Please enter your website')
-      : (websiteInput.length > 0 && !websiteRegex.test(websiteInput))
-        ? websiteRegexValid()
-        : setWebsiteValidation('');
 
     if (editing && !validationFlag) {
-      const updatedCard = {
-        firstName: firstNameInput,
-        lastName: lastNameInput,
-        designation: designationInput,
-        contact_phone: phoneInput,
-        contact_email: emailInput,
-        address_area: addressAreaInput,
-        address_city: addressCityInput,
-        address_state: addressStateInput,
-        address_country: addressCountryInput,
-        address_zipcode: zipCodeInput,
-        website: websiteInput,
-        isFavourite: card.isFavourite,
-        tags: card.tags
-      }
-      dispatch(replaceEditedCard(index, updatedCard))
+      dispatch(replaceEditedCard(index, card))
       navigate('/home-page')
       editing = false;
     }
 
     else if (!validationFlag) {
-      card = {
-        firstName: firstNameInput,
-        lastName: lastNameInput,
-        designation: designationInput,
-        contact_phone: phoneInput,
-        contact_email: emailInput,
-        address_area: addressAreaInput,
-        address_city: addressCityInput,
-        address_state: addressStateInput,
-        address_country: addressCountryInput,
-        address_zipcode: zipCodeInput,
-        website: websiteInput,
-        isFavourite: false,
-        tags: []
-      }
-
       dispatch(addNewCard(card));
       navigate('/home-page')
     }
@@ -242,9 +198,9 @@ const UpdateCardComponent = () => {
             </div>
             <div className="col-lg-7 col-9">
               <div>
-                {firstNameValidation &&
+                {errors.firstName &&
                   <div className='text-end text-danger'>
-                    {firstNameValidation}
+                    {errors.firstName}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='firstNameInput' className='m-3 col-1'>
@@ -259,9 +215,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {lastNameValidation &&
+                {errors.lastName &&
                   <div className='text-end text-danger'>
-                    {lastNameValidation}
+                    {errors.lastName}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='lastNameInput' className='m-3 col-1'>
@@ -276,9 +232,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {designationValidation &&
+                {errors.designation &&
                   <div className='text-end text-danger'>
-                    {designationValidation}
+                    {errors.designation}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='designationInput' className='m-3 col-1'>
@@ -293,9 +249,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {emailValidation &&
+                {errors.contact_email &&
                   <div className='text-end text-danger'>
-                    {emailValidation}
+                    {errors.contact_email}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='emailInput' className='m-3 col-1'>
@@ -310,9 +266,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {phoneValidation &&
+                {errors.contact_phone &&
                   <div className='text-end text-danger'>
-                    {phoneValidation}
+                    {errors.contact_phone}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='phoneInput' className='m-3 col-1'>
@@ -323,7 +279,10 @@ const UpdateCardComponent = () => {
                     ref={phoneInputRef}
                     type='text'
                     placeholder='Enter Phone'
-                    className='form-control m-2' />
+                    className='form-control m-2'
+                  // onChange={handlePhoneInput}
+                  // value={phoneValue}
+                  />
                 </div>
               </div>
             </div>
@@ -333,9 +292,9 @@ const UpdateCardComponent = () => {
             <div className="col-lg-5 col-3"></div>
             <div className="col-lg-7 col-9 p-3">
               <div>
-                {addressAreaValidation &&
+                {errors.address_area &&
                   <div className='text-end text-danger'>
-                    {addressAreaValidation}
+                    {errors.address_area}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='areaInput' className='m-3 col-1'>
@@ -350,9 +309,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {addressCityValidation &&
+                {errors.address_city &&
                   <div className='text-end text-danger'>
-                    {addressCityValidation}
+                    {errors.address_city}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='cityInput' className='m-3 col-1'>
@@ -367,9 +326,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {addressStateValidation &&
+                {errors.address_state &&
                   <div className='text-end text-danger'>
-                    {addressStateValidation}
+                    {errors.address_state}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='stateInput' className='m-3 col-1'>
@@ -384,9 +343,9 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {addressCountryValidation &&
+                {errors.address_country &&
                   <div className='text-end text-danger'>
-                    {addressCountryValidation}
+                    {errors.address_country}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='countryInput' className='m-3 col-1'>
@@ -401,12 +360,14 @@ const UpdateCardComponent = () => {
                 </div>
               </div>
               <div>
-                {zipCodeValidation &&
+                {errors.address_zipcode &&
                   <div className='text-end text-danger'>
-                    {zipCodeValidation}
+                    {errors.address_zipcode}
                   </div>}
                 <div className='d-flex'>
-                  <label htmlFor='zipCodeInput' className='m-3 col-1'><FontAwesomeIcon icon={faThumbTack} size='lg' /></label>
+                  <label htmlFor='zipCodeInput' className='m-3 col-1'>
+                    <FontAwesomeIcon icon={faThumbTack} size='lg' />
+                  </label>
                   <input
                     id='zipCodeInput'
                     ref={zipCodeInputRef}
@@ -418,9 +379,9 @@ const UpdateCardComponent = () => {
             </div>
             <div className='col-6'>
               <div>
-                {websiteValidation &&
+                {errors.website &&
                   <div className='text-end text-danger'>
-                    {websiteValidation}
+                    {errors.website}
                   </div>}
                 <div className='d-flex'>
                   <label htmlFor='zipCodeInput' className='m-3 col-1'>

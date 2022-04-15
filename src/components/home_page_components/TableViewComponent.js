@@ -38,7 +38,7 @@ const TableViewComponent = () => {
                         website
                     }, index) =>
                         <tr key={index}>
-                            <td scope='row' className='text-center'>{index + 1}</td>
+                            <th scope='row' className='text-center'>{index + 1}</th>
                             <td>
                                 {firstName + ' ' + lastName}
                             </td>
@@ -57,7 +57,7 @@ const TableViewComponent = () => {
                                 Zip Code: {address_zipcode}
                             </td>
                             <td>
-                                <a href={'https://' + website} target='_blank'>
+                                <a href={'https://' + website} rel="noreferrer" target='_blank'>
                                     {website}
                                 </a>
                             </td>

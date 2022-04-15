@@ -10,7 +10,7 @@ const LoginFooter = () => {
       <div>
         Contact us 
         <FontAwesomeIcon icon={faAt} className="mx-2" />
-        <a href="#" className="text-white">
+        <a href="login" className="text-white">
           contactcards@myorg.in
         </a>
       </div>
