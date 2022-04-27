@@ -9,6 +9,7 @@
     border-radius: 8px;
 }
 .profileImage{
+    cursor: pointer;
     width: 100px;
     height: 100px;
     font-size: 60px;
@@ -19,6 +20,7 @@
 .fontFullName{
     font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
 }
 .fontIdentifiedAs,
 .fontWebsite{

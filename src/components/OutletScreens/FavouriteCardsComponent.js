@@ -10,7 +10,7 @@ const FavouriteCardsComponent = () => {
         <div>
             {cardsCollection.find(card => card.isFavourite === true)
                 ? <div
-                    className="m-3 d-flex flex-row flex-wrap">
+                    className="m-3 d-flex flex-row flex-wrap justify-content-around">
                     {cardsCollection.map((card, index) =>
                     (card.isFavourite &&
                         <ContactCard

@@ -9,7 +9,7 @@ const AllCardsComponent = () => {
 
     return (
         <div>
-            <div className="m-3 d-flex flex-row flex-wrap">
+            <div className="m-3 d-flex flex-row flex-wrap justify-content-around">
                 {
                     searchTerm
                         ? (searchResults.length > 0

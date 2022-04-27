@@ -74,7 +74,9 @@ const ContactCard = (props) => {
         <>
             {/* <div className={fontCompanyName}>My Org</div> */}
             <div className='row m-0'>
-                <div onClick={() => setShowCardMode(true)} className="col-4">
+                <div 
+                onClick={() => setShowCardMode(true)} 
+                className="col-4">
                     {imageURL ?
                         < img
                             className={profileImage + ' text-center rounded-circle my-3'}
@@ -89,7 +91,9 @@ const ContactCard = (props) => {
                     }
                 </div>
                 <div className='col-8 my-3'>
-                    <div className={fontFullName}>
+                    <div 
+                    onClick={() => setShowCardMode(true)}
+                    className={fontFullName} >
                         {firstName + ' ' + lastName}
                     </div>
                     {/* <div className={fontIdentifiedAs}>
@@ -167,8 +171,7 @@ const ContactCard = (props) => {
 
     return (
         <>
-            {showCardMode &&
-                <CardModal card={props.card} setShowCardMode={setShowCardMode} />}
+            <CardModal card={props.card} showCardMode={showCardMode} setShowCardMode={setShowCardMode} />
             <div
                 className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3 mx-sm-3 mx-auto'}
                 key={index}

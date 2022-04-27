@@ -4,8 +4,10 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 0vh;
+    overflow: hidden;
     background-color: rgba(23, 24, 24, 0.9);
+    transition: height ease 0.2s;
 }
 .cursorPointer{
     cursor: pointer;

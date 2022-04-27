@@ -9,7 +9,7 @@ import cardModalCSS from "../../assets/css/cardModal.module.css";
 const CardModal = (props) => {
 
     const dispatch = useDispatch();
-    const { card, setShowCardMode } = props;
+    const { card, showCardMode, setShowCardMode } = props;
     const {
         firstName,
         lastName,
@@ -35,7 +35,11 @@ const CardModal = (props) => {
     } = cardModalCSS;
 
     return (
-        <div className={cardModalContainer}>
+        <div className={cardModalContainer}
+            style={showCardMode
+                ? { height: 100 + 'vh' }
+                : { height: '0px' }
+            }>
             <ClickedOut setComponentIsOpen={setShowCardMode}>
                 <div className='bg-white col-11 col-lg-8 col-xl-6 col-md-10 mx-auto my-sm-4 my-lg-5 my-2 p-sm-3'>
                     <div className='text-end'>
