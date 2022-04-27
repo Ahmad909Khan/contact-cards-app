@@ -3,7 +3,7 @@ import { ActionTypes } from "../constants/actionTypes";
 const initialState = {
     isLoggedIn: !!localStorage.getItem('token'),
     user: localStorage.getItem('token') ?
-        localStorage.getItem('user') : {}
+        JSON.parse(localStorage.getItem('user')) : {}
 };
 
 export const loginReducer = (state = initialState, { type, payload }) => {
