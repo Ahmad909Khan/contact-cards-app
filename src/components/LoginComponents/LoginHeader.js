@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react';
 import cardLogo from "../../assets/images/header_logo_login.png";
 import headerStyles from "../../assets/css/headerStyles.module.css";
 

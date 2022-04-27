@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { deleteCard } from '../../redux/actions/userActions';
+import CardButtonList from './CardButtonList';
+import TagsList from './TagsList';
+import CardModal from './CardModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faLink, faMapMarkerAlt, faThumbTack } from '@fortawesome/free-solid-svg-icons';
-import CardButtonList from './home_page_components/CardButtonList';
-import { deleteCard } from '../redux/actions/userActions';
-import cardStyles from '../assets/css/cardStyles.module.css';
+import {
+    faPhone,
+    faEnvelope,
+    faLink,
+    faMapMarkerAlt,
+    faThumbTack,
+    faTags
+} from '@fortawesome/free-solid-svg-icons';
+import cardStyles from '../../assets/css/cardStyles.module.css';
 
 const ContactCard = (props) => {
 
-    const { firstName,
+    const {
+        firstName,
         lastName,
+        imageURL,
         designation,
         contact_phone,
         contact_email,
@@ -19,20 +30,32 @@ const ContactCard = (props) => {
         address_country,
         address_zipcode,
         website,
-        isFavourite
+        isFavourite,
+        tags
     } = props.card;
+
+    const {
+        cardCSS,
+        profileImage,
+        fontFullName,
+        fontWebsite,
+        fontDesignation,
+        fontAddress,
+        cardButtonsFlipped
+    } = cardStyles;
+
     const index = props.index;
     const initials = firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
 
+    const dispatch = useDispatch();
     const [cardIsFlipped, setCardIsFlipped] = useState(false);
     const [deleteCardMode, setDeleteCardMode] = useState(false);
-    const dispatch = useDispatch()
+    const [showCardMode, setShowCardMode] = useState(false);
 
     const flipCard = (event) => {
         event.stopPropagation();
         setCardIsFlipped(!cardIsFlipped)
     }
-
 
     const deleteHandler = (cardIndex) => {
         dispatch(deleteCard(cardIndex))
@@ -41,31 +64,38 @@ const ContactCard = (props) => {
 
     const [mouseInCard, setMouseInCard] = useState(false);
     const cardButtonPosition = cardIsFlipped
-        ? cardStyles.cardButtons + ' position-absolute'
-        : cardStyles.cardButtonsFlipped + ' position-absolute';
+        ? ' position-absolute'
+        : cardButtonsFlipped + ' position-absolute';
 
     const cardButtonDisplay = mouseInCard
-        ? ' d-block ' : ' d-none '
+        ? ' d-block ' : ' d-none ';
 
     const cardFront =
         <>
-            {/* <div className={cardStyles.fontCompanyName}>My Org</div> */}
-            <div className='row'>
-                <div className="col-4">
-                    <div
-                        className={cardStyles.profileImage + ' text-center rounded-circle my-3'}
-                        title={firstName + ' ' + lastName + ' Profile Image'} >
-                        {initials}
-                    </div>
+            {/* <div className={fontCompanyName}>My Org</div> */}
+            <div className='row m-0'>
+                <div onClick={() => setShowCardMode(true)} className="col-4">
+                    {imageURL ?
+                        < img
+                            className={profileImage + ' text-center rounded-circle my-3'}
+                            src={imageURL}
+                            alt={firstName + '_' + lastName + '_Profile_Image'}
+                            title={firstName + ' ' + lastName + ' Profile Image'} />
+                        : <div
+                            className={profileImage + ' text-center rounded-circle my-3'}
+                            title={firstName + ' ' + lastName + ' Profile Image'} >
+                            {initials}
+                        </div>
+                    }
                 </div>
                 <div className='col-8 my-3'>
-                    <div className={cardStyles.fontFullName}>
+                    <div className={fontFullName}>
                         {firstName + ' ' + lastName}
                     </div>
-                    {/* <div className={cardStyles.fontIdentifiedAs}>
-                {identifiedAs}
-            </div> */}
-                    <div className={cardStyles.fontWebsite + ' mt-1'}>
+                    {/* <div className={fontIdentifiedAs}>
+                        {identifiedAs}
+                    </div> */}
+                    <div className={fontWebsite + ' mt-1'}>
                         <FontAwesomeIcon className='mx-2' icon={faLink} />
                         <a
                             className='text-decoration-none text-dark'
@@ -77,8 +107,15 @@ const ContactCard = (props) => {
                         </a>
                     </div>
 
-                    <div className={cardStyles.fontDesignation}>
+                    <div className={fontDesignation}>
                         {designation}
+                    </div>
+                    <div>
+                        <FontAwesomeIcon
+                            className='me-2'
+                            icon={faTags}
+                            flip='horizontal' />
+                        <TagsList tags={tags} />
                     </div>
                 </div>
             </div>
@@ -102,8 +139,8 @@ const ContactCard = (props) => {
         </>
 
     const cardBack =
-        <div className='p-2'>
-            <div className={cardStyles.fontAddress}>
+        <div className='p-sm-2 px-2 py-1'>
+            <div className={fontAddress}>
                 <div>
                     <FontAwesomeIcon className='my-2' icon={faMapMarkerAlt} size='lg' />
                 </div>
@@ -115,7 +152,7 @@ const ContactCard = (props) => {
                     <FontAwesomeIcon className='mx-2' icon={faThumbTack} />
                     {address_zipcode}</div>
             </div>
-            <div className={cardStyles.fontWebsite + ' mt-1'}>
+            <div className={fontWebsite + ' mt-1'}>
                 <FontAwesomeIcon className='mx-2' icon={faLink} />
                 <a
                     className='text-decoration-none text-dark'
@@ -129,9 +166,11 @@ const ContactCard = (props) => {
         </div>
 
     return (
-        <div>
+        <>
+            {showCardMode &&
+                <CardModal card={props.card} setShowCardMode={setShowCardMode} />}
             <div
-                className={cardStyles.card + ' px-3 py-2 m-3'}
+                className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3 mx-sm-3 mx-auto'}
                 key={index}
                 onMouseEnter={() => setMouseInCard(true)}
                 onMouseLeave={() => setMouseInCard(false)}>
@@ -168,7 +207,7 @@ const ContactCard = (props) => {
                     </div>
                 }
             </div>
-        </div>
+        </>
     )
 }
 

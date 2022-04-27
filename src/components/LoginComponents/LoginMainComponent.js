@@ -1,7 +1,7 @@
 import React from 'react';
-import homePageStyles from '../../assets/css/homePageStyles.module.css';
 import LoginForm from './LoginForm';
 import LoginWelcomeComponent from './LoginWelcomeComponent';
+import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const LoginMainComponent = () => {
 

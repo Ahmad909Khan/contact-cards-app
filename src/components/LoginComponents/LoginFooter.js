@@ -1,6 +1,6 @@
 import React from 'react';
-import { faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAt } from '@fortawesome/free-solid-svg-icons';
 import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const LoginFooter = () => {

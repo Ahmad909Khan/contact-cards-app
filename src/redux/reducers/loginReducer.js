@@ -2,15 +2,19 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
     isLoggedIn: !!localStorage.getItem('token'),
-    user: localStorage.getItem('token') ? 
-    localStorage.getItem('user') : {}
+    user: localStorage.getItem('token') ?
+        JSON.parse(localStorage.getItem('user')) : {}
 };
 
 export const loginReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ActionTypes.LOGIN:
-            localStorage.setItem('token', payload.token);
-            localStorage.setItem('user', payload);
+            if (!localStorage.getItem('token')) {
+                localStorage.setItem('token', JSON.stringify(payload.token));
+            }
+            if (!localStorage.getItem('user')) {
+                localStorage.setItem('user', JSON.stringify(payload));
+            }
             return {
                 ...state,
                 isLoggedIn: true,
@@ -28,7 +32,7 @@ export const loginReducer = (state = initialState, { type, payload }) => {
             localStorage.removeItem('user');
             return {
                 ...state,
-                user: payload,
+                user: {},
                 isLoggedIn: false
             };
 

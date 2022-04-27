@@ -2,7 +2,6 @@ import { ActionTypes } from "../constants/actionTypes";
 import { initialState } from "../reducers/userReducer";
 
 const user = initialState.user;
-const cardsCollection = initialState.userCards;
 
 export const login = (userCredentials) => {
 
@@ -18,10 +17,16 @@ export const login = (userCredentials) => {
         }
 }
 
-export const logout = (nullUser) => {
+export const logout = () => {
     return {
-        type: ActionTypes.LOGOUT,
-        payload: nullUser
+        type: ActionTypes.LOGOUT
+    }
+}
+
+export const loadUsers = (usersData) => {
+    return {
+        type: ActionTypes.LOAD_USERS,
+        payload: usersData
     }
 }
 
@@ -33,34 +38,9 @@ export const favouriteTrigger = (cardIndex, newFavouriteValue) => {
 }
 
 export const searchOperation = (searchTerm, category) => {
-    if (category === 'name') {
-        const searchResults = cardsCollection.filter(card => {
-            return card['firstName'].toLowerCase().includes(searchTerm.toLowerCase())
-                || card['lastName'].toLowerCase().includes(searchTerm.toLowerCase())
-        })
-        return {
-            type: ActionTypes.SEARCH,
-            payload: searchResults
-        }
-    }
-    if (category !== '') {
-        const searchResults = cardsCollection.filter(card => {
-            return card[category].toLowerCase().includes(searchTerm.toLowerCase())
-        })
-        return {
-            type: ActionTypes.SEARCH,
-            payload: searchResults
-        }
-    }
-    const searchResults = cardsCollection.filter(card => {
-        return Object.values(card)
-            .join(' ')
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
-    })
     return {
         type: ActionTypes.SEARCH,
-        payload: searchResults
+        payload: { searchTerm, category }
     }
 }
 
@@ -81,6 +61,6 @@ export const deleteCard = (cardIndex) => {
 export const replaceEditedCard = (index, updatedCard) => {
     return {
         type: ActionTypes.EDIT_CARD,
-        payload: { index, updatedCard}
+        payload: { index, updatedCard }
     }
 }

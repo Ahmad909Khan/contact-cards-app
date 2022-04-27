@@ -1,18 +1,20 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavMenuComponent from '../components/home_page_components/NavMenuComponent';
-import LoginFooter from '../components/login_components/LoginFooter';
-import MainHeader from '../components/MainHeader';
+import MainHeader from '../components/HeaderComponents/MainHeader';
+import NavMenuComponent from '../components/HomePageComponents/NavMenuComponent';
+import LoginFooter from '../components/LoginComponents/LoginFooter';
 import homePageStyles from "../assets/css/homePageStyles.module.css";
 
-const HomePage = () => {
+const HomePage = (props) => {
 
   return (
     <>
       <MainHeader />
       <div className={homePageStyles.homeMain + " bg-light"}>
         <NavMenuComponent />
-        <Outlet />
+        {props.loading
+          ? <div>Loading data... Please wait</div>
+          : <Outlet />}
       </div>
       <LoginFooter />
     </>

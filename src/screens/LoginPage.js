@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginHeader from "../components/login_components/LoginHeader";
-import LoginMainComponent from "../components/login_components/LoginMainComponent"
-import LoginFooter from "../components/login_components/LoginFooter";
+import LoginHeader from "../components/LoginComponents/LoginHeader";
+import LoginMainComponent from "../components/LoginComponents/LoginMainComponent"
+import LoginFooter from "../components/LoginComponents/LoginFooter";
 
 const LoginPage = () => {
     return (

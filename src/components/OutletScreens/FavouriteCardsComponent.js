@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import ContactCard from '../ContactCard';
+import ContactCard from '../CardComponents/ContactCard';
 
 const FavouriteCardsComponent = () => {
 

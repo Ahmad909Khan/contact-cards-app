@@ -2,6 +2,7 @@ export const ActionTypes = {
     LOGIN: 'LOGIN',
     NOT_AUTH: 'NOT_AUTH',
     LOGOUT: 'LOGOUT',
+    LOAD_USERS: 'LOAD_USERS',
     FAVOURITE_TRIGGER: 'FAVOURITE_TRIGGER',
     SEARCH: 'SEARCH',
     ADD_NEW_CARD: 'ADD_NEW_CARD',

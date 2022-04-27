@@ -1,26 +1,16 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/actions/userActions";
-import cardLogo from "../assets/images/header_logo.png";
-import headerStyles from "../assets/css/headerStyles.module.css";
-import SearchComponent from './header_components/SearchComponent';
 import { Link } from 'react-router-dom';
+import SearchComponent from './SearchComponent';
+import ProfileModal from './ProfileModal';
+import cardLogo from "../../assets/images/header_logo.png";
+import headerStyles from "../../assets/css/headerStyles.module.css";
 
 const MainHeader = () => {
-    const dispatch = useDispatch();
-    const logOutHandler = () => {
-
-        const nullUser = {
-            email: null,
-            password: null
-        };
-        dispatch(logout(nullUser));
-    }
 
     return (
         <div className={headerStyles.headerMain + " p-1 border bg-secondary text-white row m-0"}>
-            <div className="col-md-3 p-1 row m-0">
-                <div className="col-3">
+            <div className="col-md-3 p-1 d-flex">
+                <div className="me-4">
                     <Link to='/home-page' className="text-decoration-none m-0">
                         <img
                             className={headerStyles.mainHeaderLogoImage}
@@ -29,7 +19,7 @@ const MainHeader = () => {
                             title="Contact Cards" />
                     </Link>
                 </div>
-                <div className="col-9 py-2">
+                <div className="py-2">
                     <Link to='/home-page' className="text-decoration-none m-0">
                         <span
                             className="h4 text-white">
@@ -38,13 +28,11 @@ const MainHeader = () => {
                     </Link>
                 </div>
             </div>
-            <div className="col-md-6 col-10 m-0 p-1 px-3 my-1">
+            <div className="col-md-6 col-sm-8 m-0 p-1 px-3 my-1">
                 <SearchComponent />
             </div>
-            <div className="text-center col-3">
-                <button
-                    className="btn btn-muted btn-lg text-white"
-                    onClick={logOutHandler}>Log Out</button>
+            <div className="text-center col-sm-4 col-md-3">
+                <ProfileModal />
             </div>
         </div>
     )

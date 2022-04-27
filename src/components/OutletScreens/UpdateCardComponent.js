@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { addNewCard, replaceEditedCard } from '../../redux/actions/userActions';
-import formStyles from '../../assets/css/formStyles.module.css';
+import TagsInput from '../FormComponents/TagsInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser as farCircleUser } from '@fortawesome/free-regular-svg-icons';
+import { faCircleUser as farCircleUser, faImage } from '@fortawesome/free-regular-svg-icons';
 import {
   faEnvelope,
   faGlobe,
@@ -17,9 +17,11 @@ import {
   faThumbTack,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
+import formStyles from '../../assets/css/formStyles.module.css';
 
 const UpdateCardComponent = () => {
 
+  const { imageHolderClass, formCard, formImage } = formStyles;
   const { state } = useLocation();
   let { index, card, editing } = state ? state
     : {
@@ -42,15 +44,18 @@ const UpdateCardComponent = () => {
   const addressCountryInputRef = useRef();
   const zipCodeInputRef = useRef();
   const websiteInputRef = useRef();
+  const imageURLInputRef = useRef();
 
   const emailRegex = /(^.*@.*\..*$)/;
   const websiteRegex = /(^([a-zA-Z0-9]+\.*)?[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)$)/;
-  const phoneRegex = /^[0-9]{10}$/;
-  const zipCodeRegex = /^[0-9]{6}$/;
+  const phoneRegex = /^[0-9]{8,12}$/;
+  const zipCodeRegex = /^[0-9]{5,6}$/;
 
   let validationFlag;
 
   const [errors, setErrors] = useState({});
+  const [tags, setTags] = useState(card.tags ? card.tags : []);
+  const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '')
 
   // const [phoneValue, setPhoneValue] = useState('');
 
@@ -69,7 +74,73 @@ const UpdateCardComponent = () => {
   //   setPhoneValue(formattedPhoneNumber)
   // }
 
+  const validate = (values) => {
+    const errors = {}
+    if (!values.firstName) {
+      validationFlag = true;
+      errors.firstName = 'Please enter first name.';
+    }
+    if (!values.lastName) {
+      validationFlag = true;
+      errors.lastName = 'Please enter last name.';
+    }
+    if (!values.designation) {
+      validationFlag = true;
+      errors.designation = 'Please enter designation.';
+    }
+    if (!values.contact_phone) {
+      validationFlag = true;
+      errors.contact_phone = 'Please enter phone number.';
+    } else if (!phoneRegex.test(values.contact_phone)) {
+      validationFlag = true;
+      errors.contact_phone = 'Phone number must be a 10 digit number.';
+    }
+    if (!values.contact_email) {
+      validationFlag = true;
+      errors.contact_email = 'Please enter email address.';
+    } else if (!emailRegex.test(values.contact_email)) {
+      validationFlag = true;
+      errors.contact_email = 'Entered E-mail is not valid.'
+    }
+    if (!values.address_area) {
+      validationFlag = true;
+      errors.address_area = 'Please enter your address area.';
+    }
+    if (!values.address_city) {
+      validationFlag = true;
+      errors.address_city = 'Please enter your city.';
+    }
+    if (!values.address_state) {
+      validationFlag = true;
+      errors.address_state = 'Please enter your state.';
+    }
+    if (!values.address_country) {
+      validationFlag = true;
+      errors.address_country = 'Please enter your country.';
+    }
+    if (!values.address_zipcode) {
+      validationFlag = true;
+      errors.address_zipcode = 'Please enter your zip code.';
+    } else if (!zipCodeRegex.test(values.address_zipcode)) {
+      validationFlag = true;
+      errors.address_zipcode = 'Zip Code must be a 6 digit number.'
+    }
+    if (!values.website) {
+      validationFlag = true;
+      errors.website = 'Please enter your website.';
+    } else if (!websiteRegex.test(values.website)) {
+      validationFlag = true;
+      errors.website = 'Entered Website is not valid.'
+    }
+    return errors;
+  }
+  const changeHandler = (value) => {
+    setTags(value);
+  }
+
   const submitHandler = (event) => {
+
+    validationFlag = false;
 
     event.preventDefault();
 
@@ -84,10 +155,12 @@ const UpdateCardComponent = () => {
     let addressCountryInput = addressCountryInputRef.current.value;
     let zipCodeInput = zipCodeInputRef.current.value;
     let websiteInput = websiteInputRef.current.value;
+    let imageURLInput = imageURLInputRef.current.value;
 
     card = {
       firstName: firstNameInput,
       lastName: lastNameInput,
+      imageURL: imageURLInput,
       designation: designationInput,
       contact_phone: phoneInput,
       contact_email: emailInput,
@@ -98,60 +171,10 @@ const UpdateCardComponent = () => {
       address_zipcode: zipCodeInput,
       website: websiteInput,
       isFavourite: card.isFavourite ? card.isFavourite : false,
-      tags: []
+      tags: tags
     };
-    const validate = (values) => {
-      const errors = {}
-      if (!values.firstName) {
-        errors.firstName = 'Please enter first name.';
-      }
-      if (!values.lastName) {
-        errors.lastName = 'Please enter last name.';
-      }
-      if (!values.designation) {
-        errors.designation = 'Please enter designation.';
-      }
-      if (!values.contact_phone) {
-        errors.contact_phone = 'Please enter phone number.';
-      } else if (!phoneRegex.test(values.contact_phone)) {
-        errors.contact_phone = 'Phone number must be a 10 digit number.';
-      }
-      if (!values.contact_email) {
-        errors.contact_email = 'Please enter email address.';
-      } else if (!emailRegex.test(values.contact_email)) {
-        errors.contact_email = 'Wntered E-mail is not valid.'
-      }
-      if (!values.address_area) {
-        errors.address_area = 'Please enter your address area.';
-      }
-      if (!values.address_city) {
-        errors.address_city = 'Please enter your city.';
-      }
-      if (!values.address_state) {
-        errors.address_state = 'Please enter your state.';
-      }
-      if (!values.address_country) {
-        errors.address_country = 'Please enter your country.';
-      }
-      if (!values.address_zipcode) {
-        errors.address_zipcode = 'Please enter your zip code.';
-      } else if (!zipCodeRegex.test(values.address_zipcode)) {
-        errors.address_zipcode = 'Zip Code must be a 6 digit number.'
-      }
-      if (!values.website) {
-        errors.website = 'Please enter your website.';
-      } else if (!websiteRegex.test(values.website)) {
-        errors.website = 'Entered Website is not valid.'
-      }
-      return errors;
-    }
 
     setErrors(validate(card));
-    console.log(errors);
-
-    if (Object.keys(errors).length === 0) {
-      validationFlag = true
-    }
 
     if (editing && !validationFlag) {
       dispatch(replaceEditedCard(index, card))
@@ -178,32 +201,47 @@ const UpdateCardComponent = () => {
       addressCountryInputRef.current.value = card.address_country;
       zipCodeInputRef.current.value = card.address_zipcode;
       websiteInputRef.current.value = card.website;
+      imageURLInputRef.current.value = card.imageURL;
     }
   }, [card, editing])
 
   return (
-    <div className="px-4">
+    <div className="px-2 px-sm-4">
       <form className="row m-0" onSubmit={submitHandler}>
         <div className="col-lg-7 col-md-9">
-          <div className={formStyles.formCard + " bg-info row m-0 p-3 my-3"}>
-            <div className="col-3 text-center">
-              <div
-                className={formStyles.imagePlaceholderClass
+          <div className={formCard + " bg-info row m-0 p-sm-3 py-3 my-3"}>
+            <div className="col-lg-5 col-sm-9 my-auto text-center">
+              {/* <div
+                className={imagePlaceholderClass
                   + ' p-0 mx-auto my-2'}>
                 <div className='my-3 text-light px-3'>
                   Image Input Placeholder
                 </div>
+              </div> */}
+              <div className={imageHolderClass + " mx-auto"}>
+              <img
+                className={formImage}
+                src={imgURL}
+                alt='Enter your profile pic link below for preview' />
               </div>
-              <button className="" disabled>Upload Image</button>
+              
+              <div className='d-flex mt-3'>
+                <label htmlFor='imageInput' className='mx-3 mt-3 col-1'>
+                  <FontAwesomeIcon icon={faImage} size='lg' />
+                </label>
+                <input
+                  id='imageInput'
+                  ref={imageURLInputRef}
+                  className='form-control mt-2'
+                  placeholder='Enter image url'
+                  onChange={() =>setImgURL(imageURLInputRef.current.value)} />
+              </div>
+              {/* <button className="my-2" disabled>Upload Image</button> */}
             </div>
-            <div className="col-lg-7 col-9">
+            <div className="col-lg-7 col-sm-9">
               <div>
-                {errors.firstName &&
-                  <div className='text-end text-danger'>
-                    {errors.firstName}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='firstNameInput' className='m-3 col-1'>
+                  <label htmlFor='firstNameInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faUserCircle} size='lg' />
                   </label>
                   <input
@@ -211,16 +249,16 @@ const UpdateCardComponent = () => {
                     ref={firstNameInputRef}
                     type='text'
                     placeholder='Enter First Name'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.firstName &&
+                  <div className='text-end text-danger'>
+                    {errors.firstName}
+                  </div>}
               </div>
               <div>
-                {errors.lastName &&
-                  <div className='text-end text-danger'>
-                    {errors.lastName}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='lastNameInput' className='m-3 col-1'>
+                  <label htmlFor='lastNameInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={farCircleUser} size='lg' />
                   </label>
                   <input
@@ -228,16 +266,16 @@ const UpdateCardComponent = () => {
                     ref={lastNameInputRef}
                     type='text'
                     placeholder='Enter Last Name'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.lastName &&
+                  <div className='text-end text-danger'>
+                    {errors.lastName}
+                  </div>}
               </div>
               <div>
-                {errors.designation &&
-                  <div className='text-end text-danger'>
-                    {errors.designation}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='designationInput' className='m-3 col-1'>
+                  <label htmlFor='designationInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faSuitcase} size='lg' />
                   </label>
                   <input
@@ -245,16 +283,16 @@ const UpdateCardComponent = () => {
                     ref={designationInputRef}
                     type='text'
                     placeholder='Enter Designation'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.designation &&
+                  <div className='text-end text-danger'>
+                    {errors.designation}
+                  </div>}
               </div>
               <div>
-                {errors.contact_email &&
-                  <div className='text-end text-danger'>
-                    {errors.contact_email}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='emailInput' className='m-3 col-1'>
+                  <label htmlFor='emailInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faEnvelope} size='lg' />
                   </label>
                   <input
@@ -262,16 +300,16 @@ const UpdateCardComponent = () => {
                     ref={emailInputRef}
                     type='text'
                     placeholder='Enter Email'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.contact_email &&
+                  <div className='text-end text-danger'>
+                    {errors.contact_email}
+                  </div>}
               </div>
               <div>
-                {errors.contact_phone &&
-                  <div className='text-end text-danger'>
-                    {errors.contact_phone}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='phoneInput' className='m-3 col-1'>
+                  <label htmlFor='phoneInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faPhone} size='lg' />
                   </label>
                   <input
@@ -279,25 +317,25 @@ const UpdateCardComponent = () => {
                     ref={phoneInputRef}
                     type='text'
                     placeholder='Enter Phone'
-                    className='form-control m-2'
+                    className='form-control mt-2'
                   // onChange={handlePhoneInput}
                   // value={phoneValue}
                   />
                 </div>
+                {errors.contact_phone &&
+                  <div className='text-end text-danger'>
+                    {errors.contact_phone}
+                  </div>}
               </div>
             </div>
           </div>
 
-          <div className={formStyles.formCard + " bg-info row m-0 p-3 my-3"}>
+          <div className={formCard + " bg-info row m-0  p-sm-3 py-3 my-3"}>
             <div className="col-lg-5 col-3"></div>
-            <div className="col-lg-7 col-9 p-3">
+            <div className="col-lg-7 col-sm-9">
               <div>
-                {errors.address_area &&
-                  <div className='text-end text-danger'>
-                    {errors.address_area}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='areaInput' className='m-3 col-1'>
+                  <label htmlFor='areaInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faLocation} size='lg' />
                   </label>
                   <input
@@ -305,16 +343,16 @@ const UpdateCardComponent = () => {
                     ref={addressAreaInputRef}
                     type='text'
                     placeholder='Enter Address Area'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.address_area &&
+                  <div className='text-end text-danger'>
+                    {errors.address_area}
+                  </div>}
               </div>
               <div>
-                {errors.address_city &&
-                  <div className='text-end text-danger'>
-                    {errors.address_city}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='cityInput' className='m-3 col-1'>
+                  <label htmlFor='cityInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faMapMarked} size='lg' />
                   </label>
                   <input
@@ -322,16 +360,16 @@ const UpdateCardComponent = () => {
                     ref={addressCityInputRef}
                     type='text'
                     placeholder='Enter the city'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.address_city &&
+                  <div className='text-end text-danger'>
+                    {errors.address_city}
+                  </div>}
               </div>
               <div>
-                {errors.address_state &&
-                  <div className='text-end text-danger'>
-                    {errors.address_state}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='stateInput' className='m-3 col-1'>
+                  <label htmlFor='stateInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faMapMarkerAlt} size='lg' />
                   </label>
                   <input
@@ -339,16 +377,16 @@ const UpdateCardComponent = () => {
                     ref={addressStateInputRef}
                     type='text'
                     placeholder='Enter the state'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.address_state &&
+                  <div className='text-end text-danger'>
+                    {errors.address_state}
+                  </div>}
               </div>
               <div>
-                {errors.address_country &&
-                  <div className='text-end text-danger'>
-                    {errors.address_country}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='countryInput' className='m-3 col-1'>
+                  <label htmlFor='countryInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faGlobe} size='lg' />
                   </label>
                   <input
@@ -356,16 +394,16 @@ const UpdateCardComponent = () => {
                     ref={addressCountryInputRef}
                     type='text'
                     placeholder='Enter the country'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.address_country &&
+                  <div className='text-end text-danger'>
+                    {errors.address_country}
+                  </div>}
               </div>
               <div>
-                {errors.address_zipcode &&
-                  <div className='text-end text-danger'>
-                    {errors.address_zipcode}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='zipCodeInput' className='m-3 col-1'>
+                  <label htmlFor='zipCodeInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faThumbTack} size='lg' />
                   </label>
                   <input
@@ -373,39 +411,42 @@ const UpdateCardComponent = () => {
                     ref={zipCodeInputRef}
                     type='text'
                     placeholder='Enter the zip code'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.address_zipcode &&
+                  <div className='text-end text-danger'>
+                    {errors.address_zipcode}
+                  </div>}
               </div>
             </div>
-            <div className='col-6'>
+            <div className='col-sm-8 col-md-7 col-lg-6'>
               <div>
-                {errors.website &&
-                  <div className='text-end text-danger'>
-                    {errors.website}
-                  </div>}
                 <div className='d-flex'>
-                  <label htmlFor='zipCodeInput' className='m-3 col-1'>
+                  <label htmlFor='zipCodeInput' className='mx-3 mt-3 col-1'>
                     <FontAwesomeIcon icon={faLink} size='lg' />
                   </label>
                   <input
                     ref={websiteInputRef}
                     type='text'
                     placeholder='Enter Your Web Address'
-                    className='form-control m-2' />
+                    className='form-control mt-2' />
                 </div>
+                {errors.website &&
+                  <div className='text-end text-danger'>
+                    {errors.website}
+                  </div>}
               </div>
             </div>
           </div>
         </div>
-        <div className="col-lg-5 my-5">
-          <ul className="list-unstyled text-center">
-            <h3>Identification Values</h3>
-
-            <li className="my-2">tag list</li>
-            <li className="my-2">
-              <input type='text' placeholder='Enter tag' className='w-50 form-control mx-auto' />
-            </li>
-          </ul>
+        <div className="col-lg-5 my-5 text-center">
+          <h3>Identification Values</h3>
+          <TagsInput
+            id="tags"
+            onChange={changeHandler}
+            error={errors.tags}
+            defaultTags={tags}
+          />
         </div>
         <div className="text-center my-3">
           <button type='submit' className="btn btn-warning">

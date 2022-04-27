@@ -1,8 +1,8 @@
 .headerLogin{
-    height: 20vh
+    min-height: 20vh;
 }
 .headerMain{
-    height: 10vh
+    min-height: 10vh
 }
 .logoImage{
     width: 125px;
@@ -12,8 +12,16 @@
     width: 50px;
 }
 .searchSelectDropdown{
-    width: auto;
+    width: max-content;
 }
-input:focus{
-    border: none;
+.headerProfile{
+    width: 40px;
+    height: 40px;
+    border: 1px outset #333;
+}
+.profileModal{
+    z-index: 100;
+    position: absolute;
+    top: 10%;
+    right: 0;
 }

@@ -1,16 +1,25 @@
 .homeMain {
-    min-height: 80vh;
+    min-height: 76.2vh;
 }
 .loginMain {
     min-height: 70vh;
 }
-.activeNavItem {
+.activeNavItem button {
     content: "";
-    border-bottom: 5px solid #FFCA2C;
+    border-bottom:5px solid #FFCA2C;
 }
 .tableWidth{
     min-width: 1000px;
 }
+.navMenu{
+    z-index: 1;
+}
+.colorPink button{
+    color: #FB2791 !important;
+}
+.colorWhite button{
+    color:#fff;
+}
 .footer {
-    height: 10vh;
+    min-height: 10vh;
 }

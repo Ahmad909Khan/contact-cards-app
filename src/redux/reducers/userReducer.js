@@ -3,6 +3,7 @@ import { ActionTypes } from "../constants/actionTypes";
 export const initialState = {
     user:
     {
+        name: 'John Doe',
         email: "user@me.com",
         password: "123",
         token: "tokenForUser1"
@@ -11,6 +12,7 @@ export const initialState = {
         {
             firstName: "John",
             lastName: "Doe",
+            imageURL: '',
             identifiedAs: "Software Developer",
             designation: "Lead Frontend Developer",
             contact_phone: "0111222333",
@@ -22,10 +24,11 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devjohndoe.com",
             isFavourite: true,
-            tags: ["Software", "Developer"]
+            tags: ['Software', 'Developer', 'React']
         }, {
             firstName: "Brad",
             lastName: "Hawk",
+            imageURL: 'https://picsum.photos/100',
             identifiedAs: "Software Developer",
             designation: "Backend Developer",
             contact_phone: "0111222333",
@@ -37,10 +40,11 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devbradhawk.uk",
             isFavourite: false,
-            tags: []
+            tags: ['Java', 'C++']
         }, {
             firstName: "Sunny",
             lastName: "Dee",
+            imageURL: 'https://picsum.photos/100',
             identifiedAs: "Software Developer",
             designation: "Senior Backend Developer",
             contact_phone: "0111222333",
@@ -52,10 +56,11 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devsunnydee.uk",
             isFavourite: false,
-            tags: []
+            tags: ['Python', 'Java']
         }, {
             firstName: "Brian",
             lastName: "Taylor",
+            imageURL: '',
             identifiedAs: "Software Developer",
             designation: "Lead Frontend Developer",
             contact_phone: "0111222333",
@@ -67,12 +72,19 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devbriantaylor.uk",
             isFavourite: true,
-            tags: []
+            tags: ['Angular', 'React']
         },
-    ]
+    ],
+    searchTerm: '',
+    searchResults: []
 }
 export const userReducer = (state = initialState, { type, payload }) => {
     switch (type) {
+        case ActionTypes.LOAD_USERS:
+            return {
+                ...state,
+                userCards: payload === undefined ? [] : payload
+            }
         case ActionTypes.FAVOURITE_TRIGGER:
             return {
                 ...state,
@@ -84,7 +96,6 @@ export const userReducer = (state = initialState, { type, payload }) => {
                 )
             }
         case ActionTypes.ADD_NEW_CARD:
-            console.log(payload)
             return {
                 ...state,
                 userCards: [...state.userCards, payload]
@@ -95,14 +106,59 @@ export const userReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 userCards: state.userCards.filter((item, index) => index !== payload)
             }
-        
+
         case ActionTypes.EDIT_CARD:
-            return{
+            return {
                 ...state,
                 userCards: state.userCards.map(
-                    (card, index) => index === payload.index 
-                    ? payload.updatedCard : card
+                    (card, index) => index === payload.index
+                        ? payload.updatedCard : card
                 )
+            }
+
+        case ActionTypes.SEARCH:
+            const { searchTerm, category } = payload
+            if (category === 'tags') {
+                const searchResults = state.userCards.filter(card => {
+                    return card['tags'].join(' ').toLowerCase().includes(searchTerm.toLowerCase())
+                })
+                return {
+                    ...state,
+                    searchTerm: searchTerm,
+                    searchResults: searchResults
+                }
+            }
+            if (category === 'name') {
+                const searchResults = state.userCards.filter(card => {
+                    return card['firstName'].toLowerCase().includes(searchTerm.toLowerCase())
+                        || card['lastName'].toLowerCase().includes(searchTerm.toLowerCase())
+                })
+                return {
+                    ...state,
+                    searchTerm: searchTerm,
+                    searchResults: searchResults
+                }
+            }
+            if (category !== '') {
+                const searchResults = state.userCards.filter(card => {
+                    return card[category].toLowerCase().includes(searchTerm.toLowerCase())
+                })
+                return {
+                    ...state,
+                    searchTerm: searchTerm,
+                    searchResults: searchResults
+                }
+            }
+            const searchResults = state.userCards.filter(card => {
+                return Object.values(card)
+                    .join(' ')
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+            })
+            return {
+                ...state,
+                searchTerm: searchTerm,
+                searchResults: searchResults
             }
 
         default:
