@@ -125,14 +125,14 @@ const ContactCard = (props) => {
                     className='float-start mt-3 text-decoration-none text-dark'
                     href={'tel:+' + contact_phone}
                     onClick={(event) => event.stopPropagation()}>
-                    <FontAwesomeIcon icon={faPhone} className='mx-2' />
+                    <FontAwesomeIcon icon={faPhone} className='mx-1' />
                     {contact_phone}
                 </a>
                 <a
-                    className='float-end mt-3 text-decoration-none text-dark'
+                    className='float-end mt-3 text-decoration-none text-dark ms-2'
                     href={'mailto: ' + contact_email}
                     onClick={(event) => event.stopPropagation()}>
-                    <FontAwesomeIcon icon={faEnvelope} className='mx-2' />
+                    <FontAwesomeIcon icon={faEnvelope} className='mx-1' />
                     {contact_email}
                 </a>
             </div>
