@@ -2,7 +2,7 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
     isLoggedIn: !!localStorage.getItem('token'),
-    user: localStorage.getItem('user') ?
+    user: localStorage.getItem('token') ?
         localStorage.getItem('user') : {}
 };
 
