@@ -11,7 +11,9 @@ const NavMenuComponent = () => {
   const activeNavClass =
     activeNavItem
     + ' px-3 me-1 pt-2 text-decoration-none btn-secondary border-0 '
-  const inactiveNavClass = ' px-3 py-2 me-1 text-decoration-none btn-secondary border-0 '
+    + eraseBtnShadow;
+  const inactiveNavClass = eraseBtnShadow
+    + ' px-3 py-2 me-1 text-decoration-none btn-secondary border-0 ';
 
   const activeClassTrigger = (navigationData) =>
     navigationData.isActive
