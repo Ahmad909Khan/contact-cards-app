@@ -9,7 +9,7 @@ const TableViewComponent = () => {
     const { searchTerm, searchResults } = useSelector((state) => state.users);
 
     return (
-        <div className="p-3 table-responsive my-5">
+        <div className="p-3 table-responsive my-3">
             <div className="my-3">
                 <h3>List of users</h3>
             </div>
