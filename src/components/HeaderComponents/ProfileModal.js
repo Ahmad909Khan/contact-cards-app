@@ -26,7 +26,7 @@ const ProfileModal = () => {
                     setProfileIsOpen(value => !value)
                 }}>
                 <div className='text-end mx-3'>
-                    <h4 className='my-2 p-1'>{name}</h4>
+                    <h4 className='my-2 p-1 cursorPointer'>{name}</h4>
                 </div>
                 <div className=''>
                     <ProfileImage />

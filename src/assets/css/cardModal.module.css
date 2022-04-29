@@ -6,11 +6,8 @@
     width: 100vw;
     height: 0vh;
     overflow: hidden;
-    background-color: rgba(23, 24, 24, 0.9);
+    background-color: rgba(0, 0, 0, 0.87);
     transition: height ease 0.2s;
-}
-.cursorPointer{
-    cursor: pointer;
 }
 .profileInitials{
     width: 100px;

@@ -14,11 +14,8 @@
 .navMenu{
     z-index: 1;
 }
-.colorPink button{
-    color: #FB2791 !important;
-}
-.colorWhite button{
-    color:#fff;
+.eraseBtnShadow:focus {
+    box-shadow: none !important;
 }
 .footer {
     min-height: 10vh;

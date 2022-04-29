@@ -48,31 +48,21 @@ const UpdateCardComponent = () => {
 
   const emailRegex = /(^.*@.*\..*$)/;
   const websiteRegex = /(^([a-zA-Z0-9]+\.*)?[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)$)/;
-  const phoneRegex = /^[0-9]{8,12}$/;
-  const zipCodeRegex = /^[0-9]{5,6}$/;
+  const phoneRegex = /^[0-9-]{10,12}$/;
+  const zipCodeRegex = /^[0-9]{4,6}$/;
 
   let validationFlag;
 
   const [errors, setErrors] = useState({});
   const [tags, setTags] = useState(card.tags ? card.tags : []);
-  const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '')
+  const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '');
+  const [phoneInput, setPhoneInput] = useState(card.phoneInput ? card.phoneInput : '');
 
-  // const [phoneValue, setPhoneValue] = useState('');
-
-  // const formatPhoneNumber = (phoneNumber) => {
-
-  //   if (phoneNumber.length === 4)
-  //     return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
-
-  //   if (phoneNumber.length === 8)
-  //   return `${phoneNumber.slice(0, 7)
-  //   }-${phoneNumber.slice(7)}`
-  // }
-
-  // const handlePhoneInput = (event) => {
-  //   const formattedPhoneNumber = formatPhoneNumber(event.target.value)
-  //   setPhoneValue(formattedPhoneNumber)
-  // }
+  const handlePhoneInput = (event) => {
+    let number = event.target.value;
+    number = number.replace(/[^0-9]/g, '').replace(/(\d{3})(?=(\d{3})+(?!\d{5}))/g, "$1-");
+    setPhoneInput(number);
+  }
 
   const validate = (values) => {
     const errors = {}
@@ -211,20 +201,13 @@ const UpdateCardComponent = () => {
         <div className="col-lg-7 col-md-9">
           <div className={formCard + " bg-info row m-0 p-sm-3 py-3 my-3"}>
             <div className="col-lg-5 col-sm-9 my-auto text-center">
-              {/* <div
-                className={imagePlaceholderClass
-                  + ' p-0 mx-auto my-2'}>
-                <div className='my-3 text-light px-3'>
-                  Image Input Placeholder
-                </div>
-              </div> */}
               <div className={imageHolderClass + " mx-auto"}>
-              <img
-                className={formImage}
-                src={imgURL}
-                alt='Enter your profile pic link below for preview' />
+                <img
+                  className={formImage}
+                  src={imgURL}
+                  alt='Enter your profile pic link below for preview' />
               </div>
-              
+
               <div className='d-flex mt-3'>
                 <label htmlFor='imageInput' className='mx-3 mt-3 col-1'>
                   <FontAwesomeIcon icon={faImage} size='lg' />
@@ -234,9 +217,8 @@ const UpdateCardComponent = () => {
                   ref={imageURLInputRef}
                   className='form-control mt-2'
                   placeholder='Enter image url'
-                  onChange={() =>setImgURL(imageURLInputRef.current.value)} />
+                  onChange={() => setImgURL(imageURLInputRef.current.value)} />
               </div>
-              {/* <button className="my-2" disabled>Upload Image</button> */}
             </div>
             <div className="col-lg-7 col-sm-9">
               <div>
@@ -318,8 +300,8 @@ const UpdateCardComponent = () => {
                     type='text'
                     placeholder='Enter Phone'
                     className='form-control mt-2'
-                  // onChange={handlePhoneInput}
-                  // value={phoneValue}
+                    onChange={handlePhoneInput}
+                    value={phoneInput}
                   />
                 </div>
                 {errors.contact_phone &&

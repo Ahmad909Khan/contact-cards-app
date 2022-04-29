@@ -7,8 +7,9 @@ import headerStyles from '../../assets/css/headerStyles.module.css';
 
 const SearchComponent = () => {
 
+    const { searchSelectDropdown, eraseBtnShadow } = headerStyles;
     const searchTerm = useSelector((state) => state.users.searchTerm);
-    const [value, setValue] = useState(searchTerm)
+    const [value, setValue] = useState(searchTerm);
 
     const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ const SearchComponent = () => {
             className="d-flex m-0 mx-auto"
             onSubmit={searchHandler}>
             <select
-                className={"bg-light border-0 rounded-start p-1 " + headerStyles.searchSelectDropdown}
+                className={"bg-light border-0 rounded-start p-1 " + searchSelectDropdown}
                 ref={selectedCategoryRef}>
                 <option value=''>All</option>
                 <option value='name'>Name</option>
@@ -65,7 +66,7 @@ const SearchComponent = () => {
             <div className="bg-warning rounded-0 rounded-end">
                 <button
                     type='submit'
-                    className="btn mx-auto">
+                    className={eraseBtnShadow + " btn mx-auto"}>
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </div>

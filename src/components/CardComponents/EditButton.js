@@ -1,12 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cardStyles from '../../assets/css/cardStyles.module.css';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 const EditButton = (props) => {
 
-    const {cardIndex, cardToEdit} = props;
+    const { cardIndex, cardToEdit } = props;
     const navigate = useNavigate();
     let editing = false;
 
@@ -21,17 +21,17 @@ const EditButton = (props) => {
         })
     }
 
-  return (
-    <FontAwesomeIcon
-                    className={cardStyles.cursorPointer + ' text-warning my-1'}
-                    size='lg'
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        editCardHandler(cardIndex, cardToEdit);
-                    }}
-                    icon={faPencil}
-                    title='Edit this card' />
-  )
+    return (
+        <FontAwesomeIcon
+            className={cardStyles.cursorPointer + ' my-1'}
+            size='lg'
+            onClick={(event) => {
+                event.stopPropagation();
+                editCardHandler(cardIndex, cardToEdit);
+            }}
+            icon={faPencil}
+            title='Edit this card' />
+    )
 }
 
 export default EditButton

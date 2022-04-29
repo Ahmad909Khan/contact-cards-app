@@ -26,7 +26,7 @@ function App() {
           lastName: user.name.last,
           imageURL: user.picture.large,
           designation: 'Technical Consultant',
-          contact_phone: user.phone,
+          contact_phone: user.phone.replace(/[^0-9]/g, '').replace(/(\d{3})(?=(\d{3})+(?!\d{5}))/g, "$1-"),
           contact_email: user.email,
           address_area: user.location.street.name,
           address_city: user.location.city,

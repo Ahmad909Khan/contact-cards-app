@@ -6,14 +6,15 @@ import TagsList from './TagsList';
 import CardModal from './CardModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faPhone,
-    faEnvelope,
     faLink,
     faMapMarkerAlt,
     faThumbTack,
     faTags
 } from '@fortawesome/free-solid-svg-icons';
 import cardStyles from '../../assets/css/cardStyles.module.css';
+import EmailComponent from './EmailComponent';
+import PhoneComponent from './PhoneComponent';
+import WebsiteComponent from './WebsiteComponent';
 
 const ContactCard = (props) => {
 
@@ -74,9 +75,9 @@ const ContactCard = (props) => {
         <>
             {/* <div className={fontCompanyName}>My Org</div> */}
             <div className='row m-0'>
-                <div 
-                onClick={() => setShowCardMode(true)} 
-                className="col-4">
+                <div
+                    onClick={() => setShowCardMode(true)}
+                    className="col-4">
                     {imageURL ?
                         < img
                             className={profileImage + ' text-center rounded-circle my-3'}
@@ -91,9 +92,9 @@ const ContactCard = (props) => {
                     }
                 </div>
                 <div className='col-8 my-3'>
-                    <div 
-                    onClick={() => setShowCardMode(true)}
-                    className={fontFullName} >
+                    <div
+                        onClick={() => setShowCardMode(true)}
+                        className={fontFullName} >
                         {firstName + ' ' + lastName}
                     </div>
                     {/* <div className={fontIdentifiedAs}>
@@ -125,20 +126,8 @@ const ContactCard = (props) => {
             </div>
 
             <div className="clearfix">
-                <a
-                    className='float-start mt-3 text-decoration-none text-dark'
-                    href={'tel:+' + contact_phone}
-                    onClick={(event) => event.stopPropagation()}>
-                    <FontAwesomeIcon icon={faPhone} className='mx-1' />
-                    {contact_phone}
-                </a>
-                <a
-                    className='float-end mt-3 text-decoration-none text-dark ms-2'
-                    href={'mailto: ' + contact_email}
-                    onClick={(event) => event.stopPropagation()}>
-                    <FontAwesomeIcon icon={faEnvelope} className='mx-1' />
-                    {contact_email}
-                </a>
+                <PhoneComponent phone={contact_phone} />
+                <EmailComponent email={contact_email} />
             </div>
         </>
 
@@ -157,23 +146,18 @@ const ContactCard = (props) => {
                     {address_zipcode}</div>
             </div>
             <div className={fontWebsite + ' mt-1'}>
-                <FontAwesomeIcon className='mx-2' icon={faLink} />
-                <a
-                    className='text-decoration-none text-dark'
-                    href={'https://www.' + website}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(event) => event.stopPropagation()}>
-                    {website}
-                </a>
+                <WebsiteComponent website={website} />
             </div>
         </div>
 
     return (
         <>
-            <CardModal card={props.card} showCardMode={showCardMode} setShowCardMode={setShowCardMode} />
+            <CardModal
+                card={props.card}
+                showCardMode={showCardMode}
+                setShowCardMode={setShowCardMode} />
             <div
-                className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3 mx-sm-1 mx-auto'}
+                className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3 mx-sm-3 mx-xs-auto'}
                 key={index}
                 onMouseEnter={() => setMouseInCard(true)}
                 onMouseLeave={() => setMouseInCard(false)}>

@@ -29,7 +29,6 @@ const CardModal = (props) => {
 
     const {
         cardModalContainer,
-        cursorPointer,
         profileInitials,
         modalProfileImage,
     } = cardModalCSS;
@@ -41,10 +40,10 @@ const CardModal = (props) => {
                 : { height: '0px' }
             }>
             <ClickedOut setComponentIsOpen={setShowCardMode}>
-                <div className='bg-white col-11 col-lg-8 col-xl-6 col-md-10 mx-auto my-sm-4 my-lg-5 my-2 p-sm-3'>
+                <div className='bg-white col-11 col-lg-8 col-xl-6 col-md-10 mx-auto my-sm-4 my-lg-5 my-2 p-sm-3 border border-dark'>
                     <div className='text-end'>
                         <FontAwesomeIcon
-                            className={cursorPointer + ' p-2 m-xs-2 my-sm-0'}
+                            className={'cursorPointer p-2 m-xs-2 my-sm-0'}
                             icon={faTimes}
                             onClick={() => setShowCardMode(false)} />
                     </div>
@@ -77,10 +76,10 @@ const CardModal = (props) => {
                             </a>
                         </div>
                     </div>
-                    <div className='row col-sm-11 mx-auto mt-4'>
+                    <div className='row col-11 mx-auto mt-4'>
                         <div className='col-sm-7'>
                             <ul className='list-unstyled'>
-                                Contact Info:
+                                <span className='fw-bold'>Contact Info:</span>
                                 <li>
                                     <a
                                         className='text-decoration-none text-dark ms-sm-3'
@@ -101,11 +100,11 @@ const CardModal = (props) => {
                                 </li>
                             </ul>
                             <ul className='list-unstyled'>
-                                Identification Values:
+                            <span className='fw-bold'>Known For:</span>
                                 {tags.length > 0
                                     ? tags.map((tag, index) =>
                                         <li
-                                            className={cursorPointer + ' ms-4'}
+                                            className={'cursorPointer ms-4'}
                                             key={index}
                                             onClick={(event) => {
                                                 event.stopPropagation();
@@ -121,7 +120,7 @@ const CardModal = (props) => {
                             </ul>
                         </div>
                         <ul className='list-unstyled col-sm-5'>
-                            Address Info:
+                            <span className='fw-bold'>Address Info:</span>
                             <li className='ms-sm-3'>
                                 <FontAwesomeIcon className='mx-2' icon={faLocation} />
                                 {address_area}

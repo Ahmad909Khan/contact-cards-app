@@ -7,9 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
 import cardStyles from '../../assets/css/cardStyles.module.css';
+import CardModal from '../CardComponents/CardModal';
+import FavouriteButton from '../CardComponents/FavouriteButton';
 
 const UserRow = (props) => {
-    const {cursorPointer} = cardStyles;
+    const { cursorPointer } = cardStyles;
     const { card, index } = props;
     const {
         firstName,
@@ -23,10 +25,13 @@ const UserRow = (props) => {
         address_country,
         address_zipcode,
         website,
+        isFavourite,
         tags
     } = card;
 
     const [deleteUserMode, setDeleteUserMode] = useState(false);
+    const [showCardMode, setShowCardMode] = useState(false);
+    const [mouseInRow, setMouseInRow] = useState(false);
     const dispatch = useDispatch();
 
     const deleteHandler = (cardIndex) => {
@@ -65,9 +70,28 @@ const UserRow = (props) => {
             }} />
 
     return (
-        <tr key={index} onBlur={() => setDeleteUserMode(false)}>
-            <th scope='row' className='text-center'>{index + 1}</th>
-            <td>
+        <tr
+            key={index}
+            onBlur={() => setDeleteUserMode(false)}
+            onMouseEnter={() => setMouseInRow(true)}
+            onMouseLeave={() => setMouseInRow(false)} >
+            <th scope='row' className='text-center'>
+                <div className='my-2'>{index + 1}</div>
+                {isFavourite
+                    ? <FavouriteButton
+                        cardIndex={index}
+                        isFavourite={isFavourite} />
+                    : mouseInRow &&
+                    <FavouriteButton
+                        cardIndex={index}
+                        isFavourite={isFavourite} />
+                }
+                <CardModal
+                    card={card}
+                    showCardMode={showCardMode}
+                    setShowCardMode={setShowCardMode} />
+            </th>
+            <td className='cursorPointer' onClick={() => setShowCardMode(true)}>
                 {firstName + ' ' + lastName}
             </td>
             <td>{designation}</td>
