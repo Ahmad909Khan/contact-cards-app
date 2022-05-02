@@ -56,7 +56,7 @@ function App() {
         )}
         {isLoggedIn && (
           <Route
-            path="/"
+            path="/home-page"
             element={<HomePage loading={loading} />}>
             <Route index element={<AllCardsComponent />} />
             <Route path='all-cards' element={<AllCardsComponent />} />
