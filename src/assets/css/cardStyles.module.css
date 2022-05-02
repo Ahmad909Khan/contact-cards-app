@@ -83,4 +83,7 @@
     .fontAddressTitle{
         font-size: 10px;
     }
+    .tagContainer{
+        width: 170px;
+    }
 }
