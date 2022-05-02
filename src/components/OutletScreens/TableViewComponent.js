@@ -1,17 +1,42 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { utils, write, writeFile } from 'xlsx';
 import UserRow from '../TableComponents/UserRow';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const TableViewComponent = () => {
 
     const cardCollection = useSelector((state) => state.users.userCards);
     const { searchTerm, searchResults } = useSelector((state) => state.users);
+    const downloadData = () => {
+        const workBook = utils.book_new();
+        const filteredData = cardCollection.map((row) => {
+            delete row.imageURL;
+
+            return {
+                ...row,
+                tags: row.tags.join(', ')
+            };
+        })
+        const workSheet = utils.json_to_sheet(filteredData);
+        utils.book_append_sheet(workBook, workSheet, 'users');
+        let buffer = write(workBook, { bookType: 'xlsx', type: 'buffer' });
+        write(workBook, { bookType: 'xlsx', type: 'binary' });
+
+        writeFile(workBook, 'usersData.xlsx')
+    }
 
     return (
         <div className="p-3 table-responsive my-3">
-            <div className="my-3">
-                <h3>List of users</h3>
+            <div className="my-3 clearfix">
+                <h3 className='float-start'>List of users</h3>
+                <FontAwesomeIcon
+                    className='mx-2 float-end mx-4 cursorPointer p-2 btn btn-lg btn-warning'
+                    title='Download Data'
+                    icon={faDownload}
+                    onClick={downloadData} />
             </div>
             <table className={homePageStyles.tableWidth + " table table-bordered table-hover"}>
                 <thead>
