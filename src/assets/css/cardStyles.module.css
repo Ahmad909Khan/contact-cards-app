@@ -47,6 +47,10 @@
 .cursorPointer{
     cursor: pointer;
 }
+.tagContainer{
+    width: 200px;
+    margin: 5px 0;
+}
 
 @media only screen and (max-width: 500px) {
     .cardCSS{

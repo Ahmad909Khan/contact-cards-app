@@ -22,7 +22,7 @@ const FavouriteCardsComponent = () => {
                     )}
                 </div>
                 : <div className="text-center h3">
-                    User has no favourite cards.
+                    User has no cards pinned.
                 </div>
             }
         </div>

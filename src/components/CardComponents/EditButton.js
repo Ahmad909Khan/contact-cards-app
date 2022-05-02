@@ -12,7 +12,7 @@ const EditButton = (props) => {
 
     const editCardHandler = (cardIndex, cardToEdit) => {
         editing = true
-        navigate('/home-page/update-card', {
+        navigate('/update-card', {
             state: {
                 index: cardIndex,
                 card: cardToEdit,

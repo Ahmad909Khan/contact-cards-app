@@ -86,10 +86,6 @@ const UserRow = (props) => {
                         cardIndex={index}
                         isFavourite={isFavourite} />
                 }
-                <CardModal
-                    card={card}
-                    showCardMode={showCardMode}
-                    setShowCardMode={setShowCardMode} />
             </th>
             <td className='cursorPointer' onClick={() => setShowCardMode(true)}>
                 {firstName + ' ' + lastName}
@@ -130,6 +126,10 @@ const UserRow = (props) => {
             </td>
             <td className='text-center py-3'>
                 <EditButton cardIndex={index} cardToEdit={card} />
+                <CardModal
+                    card={card}
+                    showCardMode={showCardMode}
+                    setShowCardMode={setShowCardMode} />
             </td>
             <td className='text-center py-3'>
                 {deleteUserMode

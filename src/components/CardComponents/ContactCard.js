@@ -42,7 +42,8 @@ const ContactCard = (props) => {
         fontWebsite,
         fontDesignation,
         fontAddress,
-        cardButtonsFlipped
+        cardButtonsFlipped,
+        tagContainer
     } = cardStyles;
 
     const index = props.index;
@@ -115,7 +116,7 @@ const ContactCard = (props) => {
                     <div className={fontDesignation}>
                         {designation}
                     </div>
-                    <div>
+                    <div className={tagContainer}>
                         <FontAwesomeIcon
                             className='me-2'
                             icon={faTags}

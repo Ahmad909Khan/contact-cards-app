@@ -33,6 +33,11 @@ const UpdateCardComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [errors, setErrors] = useState({});
+  const [tags, setTags] = useState(card.tags ? card.tags : []);
+  const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '');
+  const [phoneInput, setPhoneInput] = useState(card.phoneInput ? card.phoneInput : '');
+
   const firstNameInputRef = useRef();
   const lastNameInputRef = useRef();
   const designationInputRef = useRef();
@@ -48,15 +53,10 @@ const UpdateCardComponent = () => {
 
   const emailRegex = /(^.*@.*\..*$)/;
   const websiteRegex = /(^([a-zA-Z0-9]+\.*)?[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)$)/;
-  const phoneRegex = /^[0-9-]{10,12}$/;
+  const phoneRegex = /^[0-9-]{10,13}$/;
   const zipCodeRegex = /^[0-9]{4,6}$/;
 
   let validationFlag;
-
-  const [errors, setErrors] = useState({});
-  const [tags, setTags] = useState(card.tags ? card.tags : []);
-  const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '');
-  const [phoneInput, setPhoneInput] = useState(card.phoneInput ? card.phoneInput : '');
 
   const handlePhoneInput = (event) => {
     let number = event.target.value;
@@ -168,13 +168,13 @@ const UpdateCardComponent = () => {
 
     if (editing && !validationFlag) {
       dispatch(replaceEditedCard(index, card))
-      navigate('/home-page')
+      navigate('/')
       editing = false;
     }
 
     else if (!validationFlag) {
       dispatch(addNewCard(card));
-      navigate('/home-page')
+      navigate('/')
     }
   }
 
@@ -193,7 +193,7 @@ const UpdateCardComponent = () => {
       websiteInputRef.current.value = card.website;
       imageURLInputRef.current.value = card.imageURL;
     }
-  }, [card, editing])
+  }, [card, editing, tags])
 
   return (
     <div className="px-2 px-sm-4">

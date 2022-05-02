@@ -7,7 +7,7 @@ const EmailComponent = (props) => {
     const email = props.email
     const [mouseInEmail, setMouseInEmail] = useState(false);
     return (
-        <div className='float-end pt-3'
+        <div className='float-end position-absolute end-0 bottom-0 pb-2 px-2'
             onMouseEnter={() => setMouseInEmail(true)}
             onMouseLeave={() => setMouseInEmail(false)} >
             {mouseInEmail &&
@@ -24,7 +24,7 @@ const EmailComponent = (props) => {
                     </div>
                 </div>}
             <a
-                className='text-decoration-none text-dark mt-3 ms-2'
+                className='text-decoration-none text-dark'
                 href={'mailto: ' + email}
                 onClick={(event) => event.stopPropagation()}
             >
