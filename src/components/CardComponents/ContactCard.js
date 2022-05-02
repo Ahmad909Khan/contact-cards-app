@@ -174,9 +174,9 @@ const ContactCard = (props) => {
 
                     {!cardIsFlipped ? cardFront : cardBack}
                 </>
-                    : <div className="text-center h4 m-0 p-0 my-5">
+                    : <div className="text-center h5 m-0 p-0 my-5">
                         Do you want to delete this card?
-                        <div className='my-1'>
+                        <div className='my-3'>
                             <button
                                 className="btn btn-light mx-2"
                                 onClick={(event) => {
