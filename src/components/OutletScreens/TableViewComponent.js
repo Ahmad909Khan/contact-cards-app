@@ -22,7 +22,7 @@ const TableViewComponent = () => {
         })
         const workSheet = utils.json_to_sheet(filteredData);
         utils.book_append_sheet(workBook, workSheet, 'users');
-        let buffer = write(workBook, { bookType: 'xlsx', type: 'buffer' });
+        // let buffer = write(workBook, { bookType: 'xlsx', type: 'buffer' });
         write(workBook, { bookType: 'xlsx', type: 'binary' });
 
         writeFile(workBook, 'usersData.xlsx')

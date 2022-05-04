@@ -9,7 +9,7 @@ const AllCardsComponent = () => {
 
     return (
         <div className="">
-            <div className="my-3 mx-auto d-flex flex-row flex-wrap">
+            <div className="my-3 mx-auto d-flex flex-row flex-wrap justify-content-center">
                 {searchTerm
                     ? (searchResults.length > 0
                         ? searchResults.map((card, index) =>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { loadUsers } from './redux/actions/userActions';
 import LoginPage from "./screens/LoginPage";
 import HomePage from './screens/HomePage';
-import NoMatch from './screens/NoMatch';
+// import NoMatch from './screens/NoMatch';
 import AllCardsComponent from './components/OutletScreens/AllCardsComponent';
 import TableViewComponent from './components/OutletScreens/TableViewComponent';
 import FavouriteCardsComponent from './components/OutletScreens/FavouriteCardsComponent';
