@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
 import cardStyles from '../../assets/css/cardStyles.module.css';
+// import ShareButton from './ShareButton';
 
 const CardButtonList = (props) => {
 
@@ -28,7 +29,7 @@ const CardButtonList = (props) => {
                 <EditButton cardIndex={index} cardToEdit={card} />
             </li>
             <li>
-                <FontAwesomeIcon className={cardStyles.cursorPointer + ' text-dark my-1'}
+                <FontAwesomeIcon className={'cursorPointer text-dark my-1'}
                     size='lg'
                     icon={farTrashCan}
                     title='Delete this card'
@@ -37,6 +38,9 @@ const CardButtonList = (props) => {
                         setDeleteCardMode(true);
                     }} />
             </li>
+            {/* <li>
+                <ShareButton imgURL={card.imgURL} />
+            </li> */}
         </ul>
     )
 }

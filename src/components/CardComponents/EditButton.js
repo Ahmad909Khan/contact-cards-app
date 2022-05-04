@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import cardStyles from '../../assets/css/cardStyles.module.css';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 const EditButton = (props) => {
@@ -23,7 +22,7 @@ const EditButton = (props) => {
 
     return (
         <FontAwesomeIcon
-            className={cardStyles.cursorPointer + ' my-1'}
+            className={'cursorPointer my-1'}
             size='lg'
             onClick={(event) => {
                 event.stopPropagation();

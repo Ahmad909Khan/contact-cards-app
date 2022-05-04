@@ -86,6 +86,7 @@ const LoginForm = () => {
                     />
                 </div>
                 <button
+                    type="submit"
                     className="btn btn-warning px-5 my-3">
                     Login
                 </button>
