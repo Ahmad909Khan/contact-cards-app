@@ -13,7 +13,7 @@ import UpdateCardComponent from './components/OutletScreens/UpdateCardComponent'
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const defaultRedirectElement = isLoggedIn ? 'home-page' : 'login';
+  const defaultRedirectElement = isLoggedIn ? '/' : 'login';
   const dispatch = useDispatch();
   const [usersData, setUsersData] = useState([]);
   const [loading, setLoading] = useState(true)
@@ -63,11 +63,11 @@ function App() {
             <Route path='table-view' element={<TableViewComponent />} />
             <Route path='favourites' element={<FavouriteCardsComponent />} />
             <Route path='update-card' element={<UpdateCardComponent />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="*" element={<Navigate to={defaultRedirectElement} replace />} />
           </Route>
         )}
         <Route
-          path="*"
+          path={"*"}
           element={<Navigate to={defaultRedirectElement} replace />}
         >
 
