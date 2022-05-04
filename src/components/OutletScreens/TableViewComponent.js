@@ -14,7 +14,7 @@ const TableViewComponent = () => {
         const workBook = utils.book_new();
         const filteredData = cardCollection.map((row) => {
             delete row.imageURL;
-
+            delete row.isFavourite;
             return {
                 ...row,
                 tags: row.tags.join(', ')
