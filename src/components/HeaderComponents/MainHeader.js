@@ -11,7 +11,7 @@ const MainHeader = () => {
         <div className={headerStyles.headerMain + " p-1 border bg-secondary text-white row m-0"}>
             <div className="col-md-3 p-1 d-flex">
                 <div className="me-4">
-                    <Link to='/home-page' className="text-decoration-none m-0">
+                    <Link to='/' className="text-decoration-none m-0">
                         <img
                             className={headerStyles.mainHeaderLogoImage}
                             src={cardLogo}
@@ -20,7 +20,7 @@ const MainHeader = () => {
                     </Link>
                 </div>
                 <div className="py-2">
-                    <Link to='/home-page' className="text-decoration-none m-0">
+                    <Link to='/' className="text-decoration-none m-0">
                         <span
                             className="h4 text-white">
                             InfoTech

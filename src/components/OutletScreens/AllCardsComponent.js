@@ -8,8 +8,8 @@ const AllCardsComponent = () => {
     const { searchTerm, searchResults } = useSelector((state) => state.users);
 
     return (
-        <div className="d-flex flex-row flex-wrap justify-content-around">
-            <div className="my-3 mx-auto d-flex flex-row flex-wrap" style={{width: 'fit-content'}}>
+        <div className="">
+            <div className="my-3 mx-auto d-flex flex-row flex-wrap">
                 {searchTerm
                     ? (searchResults.length > 0
                         ? searchResults.map((card, index) =>
