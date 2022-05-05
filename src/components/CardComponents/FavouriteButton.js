@@ -16,7 +16,7 @@ const FavouriteButton = (props) => {
 
     return (
         <FontAwesomeIcon
-            className={'my-1 cursorPointer'
+            className={'my-1 cursorPointer '
                 + (isFavourite &&
                     ' border border-3 border-top-0 border-start-0 border-end-0 border-dark')}
             size='lg'
@@ -25,7 +25,7 @@ const FavouriteButton = (props) => {
                 favouriteTriggerHandler(cardIndex, !isFavourite)
             }}
             icon={faThumbtack}
-            transform={!isFavourite && { rotate: 45 }}
+            transform={isFavourite ? { rotate: 0 } : { rotate: 45}}
             title={isFavourite
                 ? 'Click to un-pin'
                 : 'Click to pin this user'}

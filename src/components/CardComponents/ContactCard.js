@@ -152,13 +152,13 @@ const ContactCard = (props) => {
         </div>
 
     return (
-        <>
+        <section className='mx-auto'>
             <CardModal
                 card={props.card}
                 showCardMode={showCardMode}
                 setShowCardMode={setShowCardMode} />
             <div
-                className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3 mx-sm-3 mx-auto align-self-start'}
+                className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3'}
                 key={index}
                 onMouseEnter={() => setMouseInCard(true)}
                 onMouseLeave={() => setMouseInCard(false)}>
@@ -195,7 +195,7 @@ const ContactCard = (props) => {
                     </div>
                 }
             </div>
-        </>
+        </section>
     )
 }
 

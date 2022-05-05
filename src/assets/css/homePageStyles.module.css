@@ -8,10 +8,10 @@
     content: "";
     border-bottom:5px solid #FFCA2C;
 }
-.tableWidth{
+.tableWidth {
     min-width: 1000px;
 }
-.navMenu{
+.navMenu {
     z-index: 1;
 }
 .eraseBtnShadow:focus {
@@ -19,4 +19,11 @@
 }
 .footer {
     min-height: 10vh;
+}
+.cardsParentDiv {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
+    grid-gap:  0 20px;
+    padding: initial;
+    justify-content: space-evenly;
 }

@@ -21,7 +21,7 @@ const NavMenuComponent = () => {
       : inactiveNavClass;
 
   return (
-    <div className={'text-center text-md-end mt-2'}>
+    <div className='text-center text-md-end pt-2'>
       <ul className="m-0 m-sm-3 mx-md-5 btn-group p-0">
         <NavLink
           className={activeClassTrigger}

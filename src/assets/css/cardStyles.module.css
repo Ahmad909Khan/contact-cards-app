@@ -1,6 +1,5 @@
 .cardCSS{
     position: relative;
-    min-height: fit-content;
     min-height: 200px;
     min-width: 400px;
     background-color: #64ceff;
