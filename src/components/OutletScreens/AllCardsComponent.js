@@ -9,7 +9,7 @@ const AllCardsComponent = () => {
     const { searchTerm, searchResults } = useSelector((state) => state.users);
 
     return (
-        <div className="">
+        <div id='allCards' className="">
             <div className={"px-sm-3 py-3 " + homePageStyles.cardsParentDiv}>
                 {searchTerm
                     ? (searchResults.length > 0

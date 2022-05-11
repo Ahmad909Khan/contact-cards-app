@@ -13,8 +13,8 @@ const EmailComponent = (props) => {
             {mouseInEmail &&
                 <div
                     className="position-absolute"
-                    style={{ bottom: '40px', right: '0px' }}>
-                    <div className='me-3 bg-secondary text-light rounded px-3'>
+                    style={{ bottom: '0px', right: '0px', margin: '0 0 25px', padding: '0 0 5px' }}>
+                    <div className='me-3 bg-secondary text-light rounded px-3 align-items-center d-flex'>
                         {email}
                         <FontAwesomeIcon
                             className='ms-2 cursorPointer'
@@ -25,9 +25,7 @@ const EmailComponent = (props) => {
                 </div>}
             <a
                 className='text-decoration-none text-dark'
-                href={'mailto: ' + email}
-                onClick={(event) => event.stopPropagation()}
-            >
+                href={'mailto: ' + email} >
                 <FontAwesomeIcon icon={faEnvelope} className='mx-1' />
                 {email.length > 25
                     ? (email.substring(0, email.indexOf('@') + 3) + '...')

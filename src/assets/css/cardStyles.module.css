@@ -57,6 +57,7 @@
         min-height: fit-content;
         min-height: 150px;
         min-width: 300px;
+        max-width: 300px;
         font-size: 11px;
         border-radius: 6px;
     }

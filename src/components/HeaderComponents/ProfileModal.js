@@ -20,7 +20,7 @@ const ProfileModal = () => {
 
     return (
         <ClickedOut setComponentIsOpen={setProfileIsOpen}>
-            <div className={"d-flex m-0 justify-content-end"}
+            <div className={"d-flex m-0 justify-content-end position-relative"}
                 onClick={(event) => {
                     event.stopPropagation();
                     setProfileIsOpen(value => !value)
@@ -32,7 +32,7 @@ const ProfileModal = () => {
                     <ProfileImage />
                 </div>
                 <div className={profileModal + modalDisplay
-                    + "m-2 text-center p-2 px-3 text-dark border border-secondary bg-white col-3"}
+                    + "m-2 text-center p-2 px-3 text-dark border border-secondary bg-white "}
                     onClick={(event) => event.stopPropagation()} >
                     <div className='d-flex border-bottom border-3 pb-2'>
                         <ProfileImage />

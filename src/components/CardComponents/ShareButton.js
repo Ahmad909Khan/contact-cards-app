@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 
 const ShareButton = (props) => {
     return (
-        <Link to={props.imgURL}>
+        <Link to={`/user/${props.username}`}>
             <FontAwesomeIcon
                 icon={faShare}
-                className="cursorPointer my-1"
+                className="cursorPointer my-1 text-dark"
                 size='lg'
                 title='Share' />
         </Link>

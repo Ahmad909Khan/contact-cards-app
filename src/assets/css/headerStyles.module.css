@@ -22,7 +22,7 @@
 .profileModal{
     z-index: 100;
     position: absolute;
-    top: 10%;
+    top: 8vh;
     right: 0;
 }
 .eraseBtnShadow:focus {

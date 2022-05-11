@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteCard } from '../../redux/actions/userActions';
+import CardModal from './CardModal';
 import CardButtonList from './CardButtonList';
 import TagsList from './TagsList';
-import CardModal from './CardModal';
+import EmailComponent from './EmailComponent';
+import PhoneComponent from './PhoneComponent';
+import WebsiteComponent from './WebsiteComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faLink,
@@ -12,9 +15,6 @@ import {
     faTags
 } from '@fortawesome/free-solid-svg-icons';
 import cardStyles from '../../assets/css/cardStyles.module.css';
-import EmailComponent from './EmailComponent';
-import PhoneComponent from './PhoneComponent';
-import WebsiteComponent from './WebsiteComponent';
 
 const ContactCard = (props) => {
 
@@ -167,6 +167,8 @@ const ContactCard = (props) => {
                         <CardButtonList
                             index={index}
                             card={props.card}
+                            // cardFront={cardFront}
+                            // cardBack={cardBack}
                             isFavourite={isFavourite}
                             flipCard={flipCard}
                             setDeleteCardMode={setDeleteCardMode}

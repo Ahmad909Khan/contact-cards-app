@@ -5,11 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
 import cardStyles from '../../assets/css/cardStyles.module.css';
-// import ShareButton from './ShareButton';
+import ShareButton from './ShareButton';
+// import DownloadCardButton from './DownloadCardButton';
 
 const CardButtonList = (props) => {
 
-    const { index, card, isFavourite, flipCard, setDeleteCardMode } = props;
+    const {
+        index,
+        card,
+        // cardFront,
+        // cardBack,
+        isFavourite,
+        flipCard,
+        setDeleteCardMode
+    } = props;
 
     return (
         <ul className="list-unstyled mx-2">
@@ -38,8 +47,11 @@ const CardButtonList = (props) => {
                         setDeleteCardMode(true);
                     }} />
             </li>
+            <li>
+                <ShareButton username={card.username} />
+            </li>
             {/* <li>
-                <ShareButton imgURL={card.imgURL} />
+                <DownloadCardButton cardFront={cardFront} cardBack={cardBack} />
             </li> */}
         </ul>
     )

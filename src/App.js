@@ -10,18 +10,20 @@ import AllCardsComponent from './components/OutletScreens/AllCardsComponent';
 import TableViewComponent from './components/OutletScreens/TableViewComponent';
 import FavouriteCardsComponent from './components/OutletScreens/FavouriteCardsComponent';
 import UpdateCardComponent from './components/OutletScreens/UpdateCardComponent';
+import MatchURL from './screens/MatchURL';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const defaultRedirectElement = isLoggedIn ? '/' : 'login';
   const dispatch = useDispatch();
   const [usersData, setUsersData] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUserData() {
       const userList = await axios.get("https://randomuser.me/api/?results=15")
         .then(response => response.data.results.map((user) => ({
+          uuid: user.login.uuid,
+          username: user.login.username,
           firstName: user.name.first,
           lastName: user.name.last,
           imageURL: user.picture.large,
@@ -38,7 +40,7 @@ function App() {
           tags: ['API User']
         })))
       setUsersData(userList);
-      setLoading(false)
+      setLoading(false);
     }
     fetchUserData();
   }, [])
@@ -63,15 +65,13 @@ function App() {
             <Route path='table-view' element={<TableViewComponent />} />
             <Route path='favourites' element={<FavouriteCardsComponent />} />
             <Route path='update-card' element={<UpdateCardComponent />} />
-            <Route path="*" element={<Navigate to={defaultRedirectElement} replace />} />
+            <Route path="*" element={<Navigate to='/' replace />} />
           </Route>
         )}
+        <Route path={'/user/:username'} element={<MatchURL />} />
         <Route
-          path={"*"}
-          element={<Navigate to={defaultRedirectElement} replace />}
-        >
-
-        </Route>
+          path="*"
+          element={<Navigate to='login' replace />} />
       </Routes>
     </div>
   );

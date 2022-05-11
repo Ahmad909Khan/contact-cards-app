@@ -10,6 +10,7 @@ export const initialState = {
     },
     userCards: [
         {
+            uuid: '1',
             firstName: "John",
             lastName: "Doe",
             imageURL: '',
@@ -26,6 +27,7 @@ export const initialState = {
             isFavourite: true,
             tags: ['Software', 'Developer', 'React']
         }, {
+            uuid: '2',
             firstName: "Brad",
             lastName: "Hawk",
             imageURL: 'https://picsum.photos/100',
@@ -40,8 +42,9 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devbradhawk.uk",
             isFavourite: false,
-            tags: ['Java', 'C++']
+            tags: ['Java', 'C++', 'Python']
         }, {
+            uuid: '3',
             firstName: "Sunny",
             lastName: "Dee",
             imageURL: 'https://picsum.photos/100',
@@ -56,8 +59,9 @@ export const initialState = {
             address_zipcode: "221122",
             website: "devsunnydee.uk",
             isFavourite: false,
-            tags: ['Python', 'Java']
+            tags: ['Python', 'Java', 'React']
         }, {
+            uuid: '4',
             firstName: "Brian",
             lastName: "Taylor",
             imageURL: '',

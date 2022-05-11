@@ -1,5 +1,7 @@
 .cardModalContainer{
-    position: fixed;
+    position: fixed; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50vw, 50vw));
     z-index: 1000;
     top: 0;
     left: 0;
@@ -8,6 +10,7 @@
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.87);
     transition: height ease 0.2s;
+    justify-content: center;
 }
 .profileInitials{
     width: 100px;
@@ -51,68 +54,14 @@
     text-align: right;
     margin: 0.7vw 1.5vw;
 }
-/* 
+
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
-    
-.cardModalFront, .cardModalBack{
-    width: 66vw;
-    height: 33vw;
-    font-size: 2.5vw;
-}
-.modalProfileImage{
-    width: 18vw;
-    margin: 2vw 0 0;
-}
-.modalFullName{
-    margin: 4vw 0 0;
-    font-size: 3.5vw;
-}
-.modalWebsite{
-    margin: 0.5vw 0 0;
-    font-size: 2.9vw;
-}
-.modalDesignation{
-    margin: 0.5vw 0 0;
-    font-size: 2.75vw;
-}
-.modalContact{
-    margin: 3.3vw 1vw 0;
-    font-size: 2.3vw;
-}
-.modalAddress{
-    text-align: right;
-    margin: 0.7vw 1.5vw;
-}
+    .cardModalContainer{
+        grid-template-columns: repeat(auto-fit, minmax(80vw, 80vw));
+    }
 }
 @media only screen and (max-width: 600px) {
-    
-    .cardModalFront, .cardModalBack{
-        width: 80vw;
-        height: 40vw;
-        font-size: 3vw;
+    .cardModalContainer{
+        grid-template-columns: repeat(auto-fit, minmax(90vw, 90vw));
     }
-    .modalProfileImage{
-        width: 22vw;
-        margin: 2.5vw 0 0;
     }
-    .modalFullName{
-        margin: 4vw 0 0;
-        font-size: 4vw;
-    }
-    .modalWebsite{
-        margin: 0.5vw 0 0;
-        font-size: 2.9vw;
-    }
-    .modalDesignation{
-        margin: 0.5vw 0 0;
-        font-size: 2.75vw;
-    }
-    .modalContact{
-        margin: 3.3vw 1vw 0;
-        font-size: 2.3vw;
-    }
-    .modalAddress{
-        text-align: right;
-        margin: 0.7vw 1.5vw;
-    }
-    } */
