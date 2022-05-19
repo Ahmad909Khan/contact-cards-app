@@ -1,58 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FavouriteButton from './FavouriteButton';
 import EditButton from './EditButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRepeat } from '@fortawesome/free-solid-svg-icons';
-import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
-import cardStyles from '../../assets/css/cardStyles.module.css';
 import ShareButton from './ShareButton';
-// import DownloadCardButton from './DownloadCardButton';
+import DownloadCardButton from './DownloadCardButton';
+import PrintButton from './PrintButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp, faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 const CardButtonList = (props) => {
 
     const {
-        index,
         card,
-        // cardFront,
-        // cardBack,
         isFavourite,
+        cardSide,
         flipCard,
         setDeleteCardMode
     } = props;
+    const uuid = card.uuid;
+    const [extraButtonsView, setExtraButtonsView] = useState(false);
+
+    const actionButtons = <>
+        <li>
+            <FavouriteButton uuid={uuid} isFavourite={isFavourite} />
+        </li>
+        <li>
+            <EditButton uuid={uuid} cardToEdit={card} />
+        </li>
+        <li>
+            <FontAwesomeIcon className={'cursorPointer text-dark my-1'}
+                size='lg'
+                icon={farTrashCan}
+                title='Delete this card'
+                onClick={(event) => {
+                    event.stopPropagation();
+                    setDeleteCardMode(true);
+                }} />
+        </li>
+    </>
+
+    const exportButtons = <>
+        <li>
+            <ShareButton username={card.username} />
+        </li>
+        <li>
+            <DownloadCardButton username={card.username} cardSide={cardSide} />
+        </li>
+        <li>
+            <PrintButton username={card.username} cardSide={cardSide} />
+        </li>
+    </>
 
     return (
         <ul className="list-unstyled mx-2">
             <li>
                 <FontAwesomeIcon
-                    className={cardStyles.cursorPointer + ' my-1'}
+                    className='cursorPointer my-1'
                     size='lg'
                     icon={faRepeat}
                     onClick={flipCard}
                     title='Flip this card'
                 />
             </li>
+            {!extraButtonsView ? actionButtons : exportButtons}
             <li>
-                <FavouriteButton cardIndex={index} isFavourite={isFavourite} />
+                <FontAwesomeIcon
+                    className='cursorPointer my-1'
+                    icon={extraButtonsView ? faChevronUp : faChevronDown}
+                    onClick={() => setExtraButtonsView(prev => !prev)}
+                    title='Other actions'
+                />
             </li>
-            <li>
-                <EditButton cardIndex={index} cardToEdit={card} />
-            </li>
-            <li>
-                <FontAwesomeIcon className={'cursorPointer text-dark my-1'}
-                    size='lg'
-                    icon={farTrashCan}
-                    title='Delete this card'
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setDeleteCardMode(true);
-                    }} />
-            </li>
-            <li>
-                <ShareButton username={card.username} />
-            </li>
-            {/* <li>
-                <DownloadCardButton cardFront={cardFront} cardBack={cardBack} />
-            </li> */}
         </ul>
     )
 }

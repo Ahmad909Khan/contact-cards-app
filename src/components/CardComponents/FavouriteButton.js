@@ -6,12 +6,12 @@ import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 const FavouriteButton = (props) => {
 
-    const { cardIndex, isFavourite } = props;
+    const { uuid, isFavourite } = props;
 
     const dispatch = useDispatch();
 
-    const favouriteTriggerHandler = (cardIndex, newFavouriteValue) => {
-        dispatch(favouriteTrigger(cardIndex, newFavouriteValue))
+    const favouriteTriggerHandler = (uuid, newFavouriteValue) => {
+        dispatch(favouriteTrigger(uuid, newFavouriteValue))
     }
 
     return (
@@ -22,7 +22,7 @@ const FavouriteButton = (props) => {
             size='lg'
             onClick={(event) => {
                 event.stopPropagation();
-                favouriteTriggerHandler(cardIndex, !isFavourite)
+                favouriteTriggerHandler(uuid, !isFavourite)
             }}
             icon={faThumbtack}
             transform={isFavourite ? { rotate: 0 } : { rotate: 45}}

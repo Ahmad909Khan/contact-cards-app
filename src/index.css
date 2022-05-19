@@ -1,5 +1,9 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
+}
+
+body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,4 +15,25 @@ code {
 }
 .cursorPointer{
   cursor: pointer;
+}
+.main{
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+.main .header {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+.main .homeOutletContainter,
+.main .loginMain {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+.main .footer {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
 }

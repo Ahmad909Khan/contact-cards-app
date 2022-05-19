@@ -8,4 +8,5 @@ export const ActionTypes = {
     ADD_NEW_CARD: 'ADD_NEW_CARD',
     DELETE_CARD: 'DELETE_CARD',
     EDIT_CARD: 'EDIT_CARD',
+    REFRESH_CARDS: 'REFRESH_CARDS'
 }

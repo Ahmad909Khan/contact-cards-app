@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import ContactCard from '../CardComponents/ContactCard';
-import  homePageStyles from '../../assets/css/homePageStyles.module.css';
+import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const AllCardsComponent = () => {
 
@@ -13,13 +13,13 @@ const AllCardsComponent = () => {
             <div className={"px-sm-3 py-3 " + homePageStyles.cardsParentDiv}>
                 {searchTerm
                     ? (searchResults.length > 0
-                        ? searchResults.map((card, index) =>
-                            <ContactCard card={card} index={index} key={index} />
+                        ? searchResults.map((card) =>
+                            <ContactCard card={card} key={card.uuid} />
                         )
                         : <div className="text-center h3">No cards found</div>)
                     : (cardsCollection.length > 0 ?
-                        cardsCollection.map((card, index) =>
-                            <ContactCard card={card} index={index} key={index} />
+                        cardsCollection.map((card) =>
+                            <ContactCard card={card} key={card.uuid} />
                         )
                         : <div className="text-center h3">User has no cards</div>)
                 }

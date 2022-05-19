@@ -1,9 +1,3 @@
-.headerLogin{
-    min-height: 20vh;
-}
-.headerMain{
-    min-height: 10vh
-}
 .logoImage{
     width: 125px;
     margin: 0em 1em;
@@ -27,4 +21,10 @@
 }
 .eraseBtnShadow:focus {
     box-shadow: none !important;
+}
+
+@media only screen and (max-width: 500px) {
+    .logoImage {
+        width: 60px
+    }
 }

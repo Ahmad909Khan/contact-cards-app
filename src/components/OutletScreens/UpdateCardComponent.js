@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { addNewCard, replaceEditedCard } from '../../redux/actions/userActions';
+import { v4 as uuidv4 } from 'uuid';
+import { generate as generateUsername } from 'random-username-generator';
 import TagsInput from '../FormComponents/TagsInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser as farCircleUser, faImage } from '@fortawesome/free-regular-svg-icons';
@@ -23,9 +25,9 @@ const UpdateCardComponent = () => {
 
   const { imageHolderClass, formCard, formImage } = formStyles;
   const { state } = useLocation();
-  let { index, card, editing } = state ? state
+  let { uuid, card, editing } = state ? state
     : {
-      index: null,
+      uuid: null,
       card: {},
       editing: false
     };
@@ -148,6 +150,8 @@ const UpdateCardComponent = () => {
     let imageURLInput = imageURLInputRef.current.value;
 
     card = {
+      uuid: card.uuid || uuidv4(),
+      username : generateUsername(),
       firstName: firstNameInput,
       lastName: lastNameInput,
       imageURL: imageURLInput,
@@ -160,14 +164,14 @@ const UpdateCardComponent = () => {
       address_country: addressCountryInput,
       address_zipcode: zipCodeInput,
       website: websiteInput,
-      isFavourite: card.isFavourite ? card.isFavourite : false,
+      isFavourite: card.isFavourite || false,
       tags: tags
     };
 
     setErrors(validate(card));
 
     if (editing && !validationFlag) {
-      dispatch(replaceEditedCard(index, card))
+      dispatch(replaceEditedCard(uuid, card))
       navigate('/')
       editing = false;
     }

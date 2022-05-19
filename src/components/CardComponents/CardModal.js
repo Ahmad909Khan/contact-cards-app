@@ -55,7 +55,7 @@ const CardModal = (props) => {
                                     src={imageURL}
                                     alt={firstName + ' ' + lastName + ' profile pic'} />
                                 : <div
-                                    className={profileInitials + ' text-center rounded-circle my-3'}
+                                    className={profileInitials + ' text-center rounded-circle my-3 mx-auto'}
                                     title={firstName + ' ' + lastName + ' Profile Image'} >
                                     {initials}
                                 </div>

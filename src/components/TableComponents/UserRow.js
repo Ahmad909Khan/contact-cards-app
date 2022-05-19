@@ -14,6 +14,7 @@ const UserRow = (props) => {
     const { cursorPointer } = cardStyles;
     const { card, index } = props;
     const {
+        uuid,
         firstName,
         lastName,
         designation,
@@ -34,8 +35,8 @@ const UserRow = (props) => {
     const [mouseInRow, setMouseInRow] = useState(false);
     const dispatch = useDispatch();
 
-    const deleteHandler = (cardIndex) => {
-        dispatch(deleteCard(cardIndex));
+    const deleteHandler = (uuid) => {
+        dispatch(deleteCard(uuid));
     }
 
     const deleteAction = (
@@ -45,7 +46,7 @@ const UserRow = (props) => {
                 <FontAwesomeIcon
                     className="btn btn-sm btn-outline-secondary btn-secondary p-2 mx-1 text-white"
                     onClick={() => {
-                        deleteHandler(index)
+                        deleteHandler(uuid)
                         setDeleteUserMode(false)
                     }}
                     icon={faCheck}
@@ -71,7 +72,7 @@ const UserRow = (props) => {
 
     return (
         <tr
-            key={index}
+            key={uuid}
             onBlur={() => setDeleteUserMode(false)}
             onMouseEnter={() => setMouseInRow(true)}
             onMouseLeave={() => setMouseInRow(false)} >
@@ -79,11 +80,11 @@ const UserRow = (props) => {
                 <div className='my-2'>{index + 1}</div>
                 {isFavourite
                     ? <FavouriteButton
-                        cardIndex={index}
+                        uuid={uuid}
                         isFavourite={isFavourite} />
                     : mouseInRow &&
                     <FavouriteButton
-                        cardIndex={index}
+                        uuid={uuid}
                         isFavourite={isFavourite} />
                 }
             </th>
@@ -125,7 +126,7 @@ const UserRow = (props) => {
                 <TagsList tags={tags} />
             </td>
             <td className='text-center py-3'>
-                <EditButton cardIndex={index} cardToEdit={card} />
+                <EditButton uuid={uuid} cardToEdit={card} />
                 <CardModal
                     card={card}
                     showCardMode={showCardMode}

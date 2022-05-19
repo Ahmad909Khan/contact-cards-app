@@ -18,7 +18,6 @@ const CommonTags = () => {
     );
 
     const mostFrequentTags = Object.entries(count).sort((a, b) => b[1] - a[1]);
-    console.log(mostFrequentTags)
     return (
         <>
             <div className="text-center p-3 border-3 border-bottom fst-italic">

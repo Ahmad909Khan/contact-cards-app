@@ -11,7 +11,8 @@ const HomePage = (props) => {
   return (
     <>
       <MainHeader />
-      <div className={homePageStyles.homeMain + " bg-light"}>
+      <div
+        className={homePageStyles.homeMain + " bg-light homeOutletContainter"} >
         <CommonTags />
         <NavMenuComponent />
         {props.loading

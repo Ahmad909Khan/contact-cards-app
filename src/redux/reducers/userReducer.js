@@ -1,4 +1,5 @@
 import { ActionTypes } from "../constants/actionTypes";
+import cardLogo from '../../assets/images/header_logo_login.png'
 
 export const initialState = {
     user:
@@ -10,7 +11,8 @@ export const initialState = {
     },
     userCards: [
         {
-            uuid: '1',
+            uuid: 1,
+            username: 'user1',
             firstName: "John",
             lastName: "Doe",
             imageURL: '',
@@ -27,7 +29,8 @@ export const initialState = {
             isFavourite: true,
             tags: ['Software', 'Developer', 'React']
         }, {
-            uuid: '2',
+            uuid: 2,
+            username: 'user2',
             firstName: "Brad",
             lastName: "Hawk",
             imageURL: 'https://picsum.photos/100',
@@ -44,7 +47,8 @@ export const initialState = {
             isFavourite: false,
             tags: ['Java', 'C++', 'Python']
         }, {
-            uuid: '3',
+            uuid: 3,
+            username: 'user3',
             firstName: "Sunny",
             lastName: "Dee",
             imageURL: 'https://picsum.photos/100',
@@ -61,10 +65,11 @@ export const initialState = {
             isFavourite: false,
             tags: ['Python', 'Java', 'React']
         }, {
-            uuid: '4',
+            uuid: 4,
+            username: 'user4',
             firstName: "Brian",
             lastName: "Taylor",
-            imageURL: '',
+            imageURL: cardLogo,
             identifiedAs: "Software Developer",
             designation: "Lead Frontend Developer",
             contact_phone: "0111222333",
@@ -93,10 +98,15 @@ export const userReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 userCards: state.userCards.map(
-                    (card, index) =>
-                        index === payload.cardIndex
+                    (card) =>
+                        card.uuid === payload.uuid
                             ? { ...card, isFavourite: payload.newFavouriteValue }
                             : card
+                ),
+                searchResults: state.searchResults.map(
+                    (card) => card.uuid === payload.uuid
+                        ? { ...card, isFavourite: payload.newFavouriteValue }
+                        : card
                 )
             }
         case ActionTypes.ADD_NEW_CARD:
@@ -108,17 +118,40 @@ export const userReducer = (state = initialState, { type, payload }) => {
         case ActionTypes.DELETE_CARD:
             return {
                 ...state,
-                userCards: state.userCards.filter((item, index) => index !== payload)
+                userCards: state.userCards.filter(
+                    (card) => card.uuid !== payload
+                ),
+                searchResults: state.searchResults.filter(
+                    (card) => card.uuid !== payload
+                )
             }
 
         case ActionTypes.EDIT_CARD:
             return {
                 ...state,
                 userCards: state.userCards.map(
-                    (card, index) => index === payload.index
+                    (card) => card.uuid === payload.uuid
+                        ? payload.updatedCard : card
+                ),
+                searchResults: state.searchResults.map(
+                    (card) => card.uuid === payload.uuid
                         ? payload.updatedCard : card
                 )
             }
+
+        case ActionTypes.REFRESH_CARDS:
+            if (state.searchResults.length > 0) {
+                return {
+                    ...state,
+                    userCards: state.userCards.map(
+                        card => state.searchResults.find(
+                            resultCard => resultCard.uuid === card.uuid
+                        ) || card
+                    )
+                }
+            }
+            else
+                return { ...state }
 
         case ActionTypes.SEARCH:
             const { searchTerm, category } = payload

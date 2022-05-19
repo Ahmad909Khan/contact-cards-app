@@ -30,10 +30,10 @@ export const loadUsers = (usersData) => {
     }
 }
 
-export const favouriteTrigger = (cardIndex, newFavouriteValue) => {
+export const favouriteTrigger = (uuid, newFavouriteValue) => {
     return {
         type: ActionTypes.FAVOURITE_TRIGGER,
-        payload: { cardIndex, newFavouriteValue }
+        payload: { uuid, newFavouriteValue }
     }
 }
 
@@ -51,16 +51,22 @@ export const addNewCard = (newCard) => {
     }
 }
 
-export const deleteCard = (cardIndex) => {
+export const deleteCard = (uuid) => {
     return {
         type: ActionTypes.DELETE_CARD,
-        payload: cardIndex
+        payload: uuid
     }
 }
 
-export const replaceEditedCard = (index, updatedCard) => {
+export const replaceEditedCard = (uuid, updatedCard) => {
     return {
         type: ActionTypes.EDIT_CARD,
-        payload: { index, updatedCard }
+        payload: { uuid, updatedCard }
+    }
+}
+
+export const refreshCards = () => {
+    return {
+        type: ActionTypes.REFRESH_CARDS
     }
 }

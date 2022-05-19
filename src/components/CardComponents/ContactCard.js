@@ -19,6 +19,7 @@ import cardStyles from '../../assets/css/cardStyles.module.css';
 const ContactCard = (props) => {
 
     const {
+        uuid,
         firstName,
         lastName,
         imageURL,
@@ -46,25 +47,23 @@ const ContactCard = (props) => {
         tagContainer
     } = cardStyles;
 
-    const index = props.index;
     const initials = firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
 
     const dispatch = useDispatch();
     const [cardIsFlipped, setCardIsFlipped] = useState(false);
     const [deleteCardMode, setDeleteCardMode] = useState(false);
     const [showCardMode, setShowCardMode] = useState(false);
-
+    const [mouseInCard, setMouseInCard] = useState(false);
+    
     const flipCard = (event) => {
         event.stopPropagation();
         setCardIsFlipped(!cardIsFlipped)
     }
 
-    const deleteHandler = (cardIndex) => {
-        dispatch(deleteCard(cardIndex))
+    const deleteHandler = (uuid) => {
+        dispatch(deleteCard(uuid))
     }
 
-
-    const [mouseInCard, setMouseInCard] = useState(false);
     const cardButtonPosition = cardIsFlipped
         ? ' position-absolute'
         : cardButtonsFlipped + ' position-absolute';
@@ -74,7 +73,6 @@ const ContactCard = (props) => {
 
     const cardFront =
         <>
-            {/* <div className={fontCompanyName}>My Org</div> */}
             <div className='row m-0'>
                 <div
                     onClick={() => setShowCardMode(true)}
@@ -84,7 +82,8 @@ const ContactCard = (props) => {
                             className={profileImage + ' text-center rounded-circle my-3'}
                             src={imageURL}
                             alt={firstName + '_' + lastName + '_Profile_Image'}
-                            title={firstName + ' ' + lastName + ' Profile Image'} />
+                            title={firstName + ' ' + lastName + ' Profile Image'}
+                            style={{fontSize: '10px'}} />
                         : <div
                             className={profileImage + ' text-center rounded-circle my-3'}
                             title={firstName + ' ' + lastName + ' Profile Image'} >
@@ -98,9 +97,6 @@ const ContactCard = (props) => {
                         className={fontFullName} >
                         {firstName + ' ' + lastName}
                     </div>
-                    {/* <div className={fontIdentifiedAs}>
-                        {identifiedAs}
-                    </div> */}
                     <div className={fontWebsite + ' mt-1'}>
                         <FontAwesomeIcon className='mx-2' icon={faLink} />
                         <a
@@ -112,7 +108,6 @@ const ContactCard = (props) => {
                             {website}
                         </a>
                     </div>
-
                     <div className={fontDesignation}>
                         {designation}
                     </div>
@@ -125,7 +120,6 @@ const ContactCard = (props) => {
                     </div>
                 </div>
             </div>
-
             <div className="clearfix">
                 <PhoneComponent phone={contact_phone} />
                 <EmailComponent email={contact_email} />
@@ -158,18 +152,17 @@ const ContactCard = (props) => {
                 showCardMode={showCardMode}
                 setShowCardMode={setShowCardMode} />
             <div
+                id={props.card.username}
                 className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3'}
-                key={index}
+                key={uuid}
                 onMouseEnter={() => setMouseInCard(true)}
                 onMouseLeave={() => setMouseInCard(false)}>
                 {!deleteCardMode ? <>
                     <div className={cardButtonPosition + cardButtonDisplay}>
                         <CardButtonList
-                            index={index}
                             card={props.card}
-                            // cardFront={cardFront}
-                            // cardBack={cardBack}
                             isFavourite={isFavourite}
+                            cardSide={cardIsFlipped ? 'back' : 'front'}
                             flipCard={flipCard}
                             setDeleteCardMode={setDeleteCardMode}
                         />
@@ -184,7 +177,7 @@ const ContactCard = (props) => {
                                 className="btn btn-light mx-2"
                                 onClick={(event) => {
                                     event.stopPropagation()
-                                    deleteHandler(index)
+                                    deleteHandler(uuid)
                                     setDeleteCardMode(false)
                                 }}>Yes</button>
                             <button

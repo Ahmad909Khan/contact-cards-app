@@ -12,13 +12,9 @@ const FavouriteCardsComponent = () => {
             {cardsCollection.find(card => card.isFavourite === true)
                 ? <div
                     className={"px-sm-3 py-3 " + homePageStyles.cardsParentDiv}>
-                    {cardsCollection.map((card, index) =>
+                    {cardsCollection.map((card) =>
                     (card.isFavourite &&
-                        <ContactCard
-                            card={card}
-                            index={index}
-                            key={index}
-                        />
+                        <ContactCard card={card} key={card.uuid} />
                     )
                     )}
                 </div>

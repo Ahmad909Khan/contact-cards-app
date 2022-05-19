@@ -5,15 +5,15 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 const EditButton = (props) => {
 
-    const { cardIndex, cardToEdit } = props;
+    const { uuid, cardToEdit } = props;
     const navigate = useNavigate();
     let editing = false;
 
-    const editCardHandler = (cardIndex, cardToEdit) => {
+    const editCardHandler = (uuid, cardToEdit) => {
         editing = true
         navigate('/update-card', {
             state: {
-                index: cardIndex,
+                uuid: uuid,
                 card: cardToEdit,
                 editing: editing,
             }
@@ -26,7 +26,7 @@ const EditButton = (props) => {
             size='lg'
             onClick={(event) => {
                 event.stopPropagation();
-                editCardHandler(cardIndex, cardToEdit);
+                editCardHandler(uuid, cardToEdit);
             }}
             icon={faPencil}
             title='Edit this card' />

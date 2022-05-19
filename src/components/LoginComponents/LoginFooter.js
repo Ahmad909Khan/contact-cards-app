@@ -1,11 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
-import homePageStyles from '../../assets/css/homePageStyles.module.css';
 
 const LoginFooter = () => {
   return (
-    <div className={homePageStyles.footer + " bg-secondary p-3 text-center text-white"}>
+    <div className="footer bg-secondary p-3 text-center text-white">
       <div>About Us</div>
       <div>
         Contact us 

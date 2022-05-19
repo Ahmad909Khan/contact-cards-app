@@ -58,7 +58,7 @@ const TableViewComponent = () => {
                     {searchTerm
                         ? searchResults.length > 0
                             ? searchResults.map((card, index) =>
-                                <UserRow card={card} index={index} key={index} />)
+                                <UserRow card={card} index={index} key={card.uuid} />)
                             : <tr>
                                 <td colspan="10" className="text-center">
                                     No Users found
@@ -66,7 +66,7 @@ const TableViewComponent = () => {
                             </tr>
                         : cardCollection.length > 0
                             ? cardCollection.map((card, index) =>
-                                <UserRow card={card} index={index} key={index} />)
+                                <UserRow card={card} index={index} key={card.uuid} />)
                             : <tr>
                                 <td colSpan="10" className="text-center">
                                     No User Data Available

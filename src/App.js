@@ -49,7 +49,7 @@ function App() {
   }, [usersData, dispatch])
 
   return (
-    <div className="App">
+    <div className="App main">
       <Routes>
         {!isLoggedIn && (
           <Route
@@ -65,10 +65,10 @@ function App() {
             <Route path='table-view' element={<TableViewComponent />} />
             <Route path='favourites' element={<FavouriteCardsComponent />} />
             <Route path='update-card' element={<UpdateCardComponent />} />
+            <Route path={'/user/:username'} element={<MatchURL />} />
             <Route path="*" element={<Navigate to='/' replace />} />
           </Route>
         )}
-        <Route path={'/user/:username'} element={<MatchURL />} />
         <Route
           path="*"
           element={<Navigate to='login' replace />} />

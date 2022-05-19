@@ -1,9 +1,3 @@
-.homeMain {
-    min-height: 76.2vh;
-}
-.loginMain {
-    min-height: 70vh;
-}
 .activeNavItem button {
     content: "";
     border-bottom:5px solid #FFCA2C;
@@ -16,9 +10,6 @@
 }
 .eraseBtnShadow:focus {
     box-shadow: none !important;
-}
-.footer {
-    min-height: 10vh;
 }
 .cardsParentDiv {
     display: grid;

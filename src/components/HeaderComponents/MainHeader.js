@@ -8,7 +8,7 @@ import headerStyles from "../../assets/css/headerStyles.module.css";
 const MainHeader = () => {
 
     return (
-        <div className={headerStyles.headerMain + " p-1 border bg-secondary text-white row m-0"}>
+        <div className={headerStyles.headerMain + " p-1 border bg-secondary text-white row m-0 header"}>
             <div className="col-md-3 p-1 d-flex">
                 <div className="me-4">
                     <Link to='/' className="text-decoration-none m-0">
