@@ -38,7 +38,7 @@ const UpdateCardComponent = () => {
   const [errors, setErrors] = useState({});
   const [tags, setTags] = useState(card.tags ? card.tags : []);
   const [imgURL, setImgURL] = useState(card.imageURL ? card.imageURL : '');
-  const [phoneInput, setPhoneInput] = useState(card.phoneInput ? card.phoneInput : '');
+  const [phoneInput, setPhoneInput] = useState(card.contact_phone || '');
 
   const firstNameInputRef = useRef();
   const lastNameInputRef = useRef();
@@ -151,7 +151,7 @@ const UpdateCardComponent = () => {
 
     card = {
       uuid: card.uuid || uuidv4(),
-      username : generateUsername(),
+      username : card.username || generateUsername(),
       firstName: firstNameInput,
       lastName: lastNameInput,
       imageURL: imageURLInput,
