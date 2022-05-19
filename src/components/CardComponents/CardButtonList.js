@@ -7,13 +7,16 @@ import PrintButton from './PrintButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan as farTrashCan } from '@fortawesome/free-regular-svg-icons';
+import cardStyles from '../../assets/css/cardStyles.module.css';
 
 const CardButtonList = (props) => {
 
     const {
         card,
         isFavourite,
-        cardSide,
+        cardIsFlipped,
+        cardFront,
+        cardBack,
         flipCard,
         setDeleteCardMode
     } = props;
@@ -44,11 +47,12 @@ const CardButtonList = (props) => {
             <ShareButton username={card.username} />
         </li>
         <li>
-            <DownloadCardButton username={card.username} cardSide={cardSide} />
+            <DownloadCardButton username={card.username} cardSide={cardIsFlipped ? 'back' : 'front'} />
         </li>
         <li>
-            <PrintButton username={card.username} cardSide={cardSide} />
+            <PrintButton username={card.username} cardSide={cardIsFlipped ? 'back' : 'front'} />
         </li>
+
     </>
 
     return (
@@ -71,6 +75,13 @@ const CardButtonList = (props) => {
                     title='Other actions'
                 />
             </li>
+            <div 
+            id={card.username}
+            className={cardStyles.cardCSS + ' position-absolute end-0 px-sm-3 px-1 py-sm-2 py-1'}
+            style={{ marginTop: '-1000vh' }}
+            >
+                {cardIsFlipped ? cardBack : cardFront}
+            </div>
         </ul>
     )
 }

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const DownloadCardButton = (props) => {
 
     const { username, cardSide } = props;
-
     const downloadCard = useCallback(async () => {
         const canvas = await html2canvas(
             document.getElementById(`${username}`),

@@ -54,7 +54,7 @@ const ContactCard = (props) => {
     const [deleteCardMode, setDeleteCardMode] = useState(false);
     const [showCardMode, setShowCardMode] = useState(false);
     const [mouseInCard, setMouseInCard] = useState(false);
-    
+
     const flipCard = (event) => {
         event.stopPropagation();
         setCardIsFlipped(!cardIsFlipped)
@@ -83,7 +83,7 @@ const ContactCard = (props) => {
                             src={imageURL}
                             alt={firstName + '_' + lastName + '_Profile_Image'}
                             title={firstName + ' ' + lastName + ' Profile Image'}
-                            style={{fontSize: '10px'}} />
+                            style={{ fontSize: '10px' }} />
                         : <div
                             className={profileImage + ' text-center rounded-circle my-3'}
                             title={firstName + ' ' + lastName + ' Profile Image'} >
@@ -152,24 +152,26 @@ const ContactCard = (props) => {
                 showCardMode={showCardMode}
                 setShowCardMode={setShowCardMode} />
             <div
-                id={props.card.username}
                 className={cardCSS + ' px-sm-3 px-1 py-sm-2 py-1 my-3'}
                 key={uuid}
                 onMouseEnter={() => setMouseInCard(true)}
                 onMouseLeave={() => setMouseInCard(false)}>
-                {!deleteCardMode ? <>
-                    <div className={cardButtonPosition + cardButtonDisplay}>
-                        <CardButtonList
-                            card={props.card}
-                            isFavourite={isFavourite}
-                            cardSide={cardIsFlipped ? 'back' : 'front'}
-                            flipCard={flipCard}
-                            setDeleteCardMode={setDeleteCardMode}
-                        />
-                    </div>
+                {!deleteCardMode
+                    ? <>
+                        <div className={cardButtonPosition + cardButtonDisplay}>
+                            <CardButtonList
+                                card={props.card}
+                                cardFront={cardFront}
+                                cardBack={cardBack}
+                                isFavourite={isFavourite}
+                                cardIsFlipped={cardIsFlipped}
+                                flipCard={flipCard}
+                                setDeleteCardMode={setDeleteCardMode}
+                            />
+                        </div>
 
-                    {!cardIsFlipped ? cardFront : cardBack}
-                </>
+                        {!cardIsFlipped ? cardFront : cardBack}
+                    </>
                     : <div className="text-center h5 m-0 p-0 my-5">
                         Do you want to delete this card?
                         <div className='my-3'>
