@@ -14,8 +14,8 @@ const ProfileModal = () => {
     const logOutHandler = () => {
         dispatch(logout());
     }
-
-    const {profileModal} = headerStyles;
+    
+    const { profileModal } = headerStyles;
     const modalDisplay = profileIsOpen ? ' d-block ' : ' d-none '
 
     return (
@@ -31,8 +31,9 @@ const ProfileModal = () => {
                 <div className=''>
                     <ProfileImage />
                 </div>
-                <div className={profileModal + modalDisplay
-                    + "m-2 text-center p-2 px-3 text-dark border border-secondary bg-white "}
+                <div
+                    className={profileModal + modalDisplay
+                        + "m-2 text-center p-2 px-3 text-dark border border-secondary "}
                     onClick={(event) => event.stopPropagation()} >
                     <div className='d-flex border-bottom border-3 pb-2'>
                         <ProfileImage />

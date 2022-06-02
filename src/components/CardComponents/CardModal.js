@@ -2,7 +2,18 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { searchOperation } from '../../redux/actions/userActions';
 import ClickedOut from '../../util/ClickedOutOfProfile';
-import { faEnvelope, faGlobe, faLink, faLocation, faMapMarked, faMapMarkerAlt, faPhone, faTags, faThumbTack, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEnvelope,
+    faGlobe,
+    faLink,
+    faLocation,
+    faMapMarked,
+    faMapMarkerAlt,
+    faPhone,
+    faTags,
+    faThumbTack,
+    faTimes
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cardModalCSS from "../../assets/css/cardModal.module.css";
 
@@ -27,6 +38,13 @@ const CardModal = (props) => {
     } = card;
     const initials = firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
 
+    const generateRandomColor = () => {
+        let r = Math.round((Math.random() * 255)); //red 0 to 255
+        let g = Math.round((Math.random() * 255)); //green 0 to 255
+        let b = Math.round((Math.random() * 255)); //blue 0 to 255
+        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    }
+
     const {
         cardModalContainer,
         profileInitials,
@@ -41,7 +59,9 @@ const CardModal = (props) => {
             }>
             <div>
                 <ClickedOut setComponentIsOpen={setShowCardMode}>
-                    <div className='bg-white  m-0 my-sm-4 my-lg-5 my-2 p-sm-3 border border-dark'>
+                    <div
+                        className='m-0 my-sm-4 my-lg-5 my-2 p-sm-3 border border-dark'
+                        style={{ backgroundColor: generateRandomColor() }} >
                         <div className='text-end'>
                             <FontAwesomeIcon
                                 className={'cursorPointer p-2 m-xs-2 my-sm-0'}
@@ -69,7 +89,7 @@ const CardModal = (props) => {
                             <div>
                                 <FontAwesomeIcon className='mx-2' icon={faLink} />
                                 <a
-                                    className='text-decoration-none text-dark'
+                                    className='text-decoration-none text-light'
                                     href={'https://' + website}
                                     target="_blank"
                                     rel="noreferrer">
@@ -83,16 +103,16 @@ const CardModal = (props) => {
                                     <span className='fw-bold'>Contact Info:</span>
                                     <li>
                                         <a
-                                            className='text-decoration-none text-dark ms-sm-3'
+                                            className='text-decoration-none text-light ms-sm-3'
                                             href={'tel:+' + contact_phone}
                                             onClick={(event) => event.stopPropagation()}>
-                                            <FontAwesomeIcon icon={faPhone} className='mx-2' />
+                                            <FontAwesomeIcon icon={faPhone} className=' mx-2' />
                                             {contact_phone}
                                         </a>
                                     </li>
                                     <li>
                                         <a
-                                            className='text-decoration-none text-dark ms-sm-3'
+                                            className='text-decoration-none text-light ms-sm-3'
                                             href={'mailto: ' + contact_email}
                                             onClick={(event) => event.stopPropagation()}>
                                             <FontAwesomeIcon icon={faEnvelope} className='mx-2' />

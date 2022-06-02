@@ -9,6 +9,16 @@
     height: 0vh;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.87);
+    text-shadow:
+        -1px -1px 0 #333,
+        0   -1px 0 #333,
+        1px -1px 0 #333,
+        1px  0   0 #333,
+        1px  1px 0 #333,
+        0    1px 0 #333,
+        -1px  1px 0 #333,
+        -1px  0   0 #333; 
+    color: #fff;
     transition: height ease 0.2s;
     justify-content: center;
 }
@@ -29,6 +39,17 @@
     border-radius: 10px;
     font-size: 1.6vw;
 } */
+.modalIcons{
+    text-shadow:
+        -1px -1px 0 #333,
+        0   -1px 0 #333,
+        1px -1px 0 #333,
+        1px  0   0 #333,
+        1px  1px 0 #333,
+        0    1px 0 #333,
+        -1px  1px 0 #333,
+        -1px  0   0 #333; 
+}
 .modalProfileImage{
     border: 3px inset #333;
     border-radius: 5px;
